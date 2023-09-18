@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.LogNet
+namespace TOPRO.HSL.LogNet
 {
     /// <summary>
     /// 一个日志组件，可以根据时间来区分不同的文件存储

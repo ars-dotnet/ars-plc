@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HslCommunication.Core;
-using HslCommunication.Core.IMessage;
+using TOPRO.HSL.Core;
+using TOPRO.HSL.Core.IMessage;
 using System.Net.Sockets;
-using HslCommunication.Core.Net;
+using TOPRO.HSL.Core.Net;
 
 
 /********************************************************************************
@@ -17,7 +17,7 @@ using HslCommunication.Core.Net;
  * 
  *********************************************************************************/
 
-namespace HslCommunication.Profinet.Siemens
+namespace TOPRO.HSL.Profinet.Siemens
 {
     /// <summary>
     /// 使用了Fetch/Write协议来和西门子进行通讯，该种方法需要在PLC侧进行一些配置 ->

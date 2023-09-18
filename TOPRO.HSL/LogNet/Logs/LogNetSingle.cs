@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace HslCommunication.LogNet
+namespace TOPRO.HSL.LogNet
 {
     /// <summary>
     /// 单日志文件对象

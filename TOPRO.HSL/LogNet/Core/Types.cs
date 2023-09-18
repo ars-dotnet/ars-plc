@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace HslCommunication.LogNet
+namespace TOPRO.HSL.LogNet
 {
 
 

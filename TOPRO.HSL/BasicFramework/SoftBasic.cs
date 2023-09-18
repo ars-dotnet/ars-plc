@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json.Linq;
 #if !NETSTANDARD2_0
-using System.Windows.Forms;
 #endif
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Drawing;
 
-namespace HslCommunication.BasicFramework
+namespace TOPRO.HSL.BasicFramework
 {
     /// <summary>
     /// 一个软件基础类，提供常用的一些静态方法 ->
@@ -389,31 +388,6 @@ namespace HslCommunication.BasicFramework
 
 #if !NETSTANDARD2_0
 
-        /// <summary>
-        /// 显示一个完整的错误信息 ->
-        /// Displays a complete error message
-        /// </summary>
-        /// <param name="ex">异常对象</param>
-        /// <remarks>调用本方法可以显示一个异常的详细信息</remarks>
-        /// <exception cref="NullReferenceException"></exception>
-        public static void ShowExceptionMessage( Exception ex )
-        {
-            MessageBox.Show( GetExceptionMessage( ex ) );
-        }
-
-
-        /// <summary>
-        /// 显示一个完整的错误信息，和额外的字符串描述信息 ->
-        /// Displays a complete error message, and additional string description information
-        /// </summary>
-        /// <param name="extraMsg">额外的描述信息</param>
-        /// <remarks>调用本方法可以显示一个异常的详细信息</remarks>
-        /// <param name="ex">异常对象</param>
-        /// <exception cref="NullReferenceException"></exception>
-        public static void ShowExceptionMessage( string extraMsg, Exception ex )
-        {
-            MessageBox.Show( GetExceptionMessage( extraMsg, ex ) );
-        }
 
 #endif
 
@@ -796,7 +770,7 @@ namespace HslCommunication.BasicFramework
         /// <remarks>
         /// 当你要显示本组件框架的版本号的时候，就可以用这个属性来显示
         /// </remarks>
-        public static SystemVersion FrameworkVersion { get; set; } = new SystemVersion( "5.3.2" );
+        public static SystemVersion FrameworkVersion { get; set; } = new SystemVersion("1.6.2");
 
 
         #endregion

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HslCommunication.Core.Net
+namespace TOPRO.HSL.Core.Net
 {
     public interface ISerialNetOperation : INetOperation
     {

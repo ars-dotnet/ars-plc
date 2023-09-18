@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.Core
+namespace TOPRO.HSL.Core
 {
     /// <summary>
     /// 饼图的基本元素

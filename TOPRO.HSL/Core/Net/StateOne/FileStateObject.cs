@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using System.Threading;
 
-namespace HslCommunication.Core.Net
+namespace TOPRO.HSL.Core.Net
 {
     /// <summary>
     /// 文件传送的异步对象

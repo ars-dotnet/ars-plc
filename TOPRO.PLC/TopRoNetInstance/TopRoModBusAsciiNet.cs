@@ -1,4 +1,4 @@
-﻿using HslCommunication.ModBus;
+﻿using TOPRO.HSL.ModBus;
 using System;
 using System.Collections.Generic;
 using System.Linq;

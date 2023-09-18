@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace HslCommunication.Core
+namespace TOPRO.HSL.Core
 {
 
     #region 多线程同步协调类

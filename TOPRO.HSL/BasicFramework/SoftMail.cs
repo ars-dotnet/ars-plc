@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 
-namespace HslCommunication.BasicFramework
+namespace TOPRO.HSL.BasicFramework
 {
 
     /****************************************************************************

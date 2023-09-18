@@ -1,4 +1,4 @@
-﻿using HslCommunication.Core.IMessage;
+﻿using TOPRO.HSL.Core.IMessage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
-namespace HslCommunication.Core.Net
+namespace TOPRO.HSL.Core.Net
 {
     /// <summary>
     /// 服务器程序的基础类

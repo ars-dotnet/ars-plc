@@ -1,4 +1,4 @@
-﻿using HslCommunication.Profinet.Siemens;
+﻿using TOPRO.HSL.Profinet.Siemens;
 using System;
 using System.Collections.Generic;
 using System.Linq;

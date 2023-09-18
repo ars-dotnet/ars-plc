@@ -1,10 +1,10 @@
-﻿using HslCommunication.BasicFramework;
+﻿using TOPRO.HSL.BasicFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication
+namespace TOPRO.HSL
 {
 
     /*******************************************************************************

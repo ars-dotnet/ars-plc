@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-namespace HslCommunication.Enthernet
+namespace TOPRO.HSL.Enthernet
 { 
     /// <summary>
     /// 通用设备的基础状态

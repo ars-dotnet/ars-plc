@@ -19,7 +19,7 @@ using System.Text;
  
 
 
-namespace HslCommunication.Core
+namespace TOPRO.HSL.Core
 {
     /// <summary>
     /// 支持转换器的基础接口

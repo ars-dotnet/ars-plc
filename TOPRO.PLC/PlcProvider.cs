@@ -1,7 +1,7 @@
-﻿using HslCommunication.Core;
-using HslCommunication.Core.IMessage;
-using HslCommunication.Core.Net;
-using HslCommunication.Profinet.Melsec;
+﻿using TOPRO.HSL.Core;
+using TOPRO.HSL.Core.IMessage;
+using TOPRO.HSL.Core.Net;
+using TOPRO.HSL.Profinet.Melsec;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

@@ -1,5 +1,5 @@
-﻿using HslCommunication.Core;
-using HslCommunication.Core.Net;
+﻿using TOPRO.HSL.Core;
+using TOPRO.HSL.Core.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
-namespace HslCommunication.Enthernet
+namespace TOPRO.HSL.Enthernet
 {
     /// <summary>
     /// 高性能的异步网络服务器类，适合搭建局域网聊天程序，消息推送程序

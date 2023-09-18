@@ -1,4 +1,4 @@
-﻿using HslCommunication.Profinet.Melsec;
+﻿using TOPRO.HSL.Profinet.Melsec;
 using TOPRO.PLC.Enums;
 using TOPRO.PLC.TopRoNetOperation;
 using TOPRO.PLC.TopRoOperations;

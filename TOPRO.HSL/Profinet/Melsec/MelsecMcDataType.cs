@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.Profinet.Melsec
+namespace TOPRO.HSL.Profinet.Melsec
 {
     /// <summary>
     /// 三菱PLC的数据类型，此处包含了几个常用的类型

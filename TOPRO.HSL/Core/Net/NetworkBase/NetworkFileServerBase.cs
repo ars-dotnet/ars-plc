@@ -4,12 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
-using HslCommunication.BasicFramework;
-using HslCommunication.Enthernet;
-using HslCommunication.LogNet;
+using TOPRO.HSL.BasicFramework;
+using TOPRO.HSL.Enthernet;
+using TOPRO.HSL.LogNet;
 using System.Threading;
 
-namespace HslCommunication.Core.Net
+namespace TOPRO.HSL.Core.Net
 {
     /// <summary>
     /// 文件服务器类的基类，为直接映射文件模式和间接映射文件模式提供基础的方法支持

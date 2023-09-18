@@ -5,7 +5,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.BasicFramework
+namespace TOPRO.HSL.BasicFramework
 {
     /// <summary>
     /// 一个负责压缩解压数据字节的类

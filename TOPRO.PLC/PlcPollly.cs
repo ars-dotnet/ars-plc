@@ -1,4 +1,4 @@
-﻿using HslCommunication;
+﻿using TOPRO.HSL;
 using Polly;
 using System;
 using System.Collections.Generic;

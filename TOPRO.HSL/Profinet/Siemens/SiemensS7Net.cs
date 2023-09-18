@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
-using HslCommunication.Core;
-using HslCommunication.Core.IMessage;
-using HslCommunication.Core.Net;
+using TOPRO.HSL.Core;
+using TOPRO.HSL.Core.IMessage;
+using TOPRO.HSL.Core.Net;
 
 
 
@@ -21,7 +21,7 @@ using HslCommunication.Core.Net;
 
 
 
-namespace HslCommunication.Profinet.Siemens
+namespace TOPRO.HSL.Profinet.Siemens
 {
     /// <summary>
     /// 一个西门子的客户端类，使用S7协议来进行数据交互 ->

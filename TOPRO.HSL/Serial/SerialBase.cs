@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.IO.Ports;
 using System.Threading;
-using HslCommunication.Core;
-using HslCommunication.LogNet;
-using HslCommunication.Core.Net;
+using TOPRO.HSL.Core;
+using TOPRO.HSL.LogNet;
+using TOPRO.HSL.Core.Net;
 
-namespace HslCommunication.Serial
+namespace TOPRO.HSL.Serial
 {
     /// <summary>
     /// 所有串行通信类的基类，提供了一些基础的服务

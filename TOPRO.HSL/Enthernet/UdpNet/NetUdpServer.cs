@@ -4,10 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using HslCommunication.Core;
-using HslCommunication.Core.Net;
+using TOPRO.HSL.Core;
+using TOPRO.HSL.Core.Net;
 
-namespace HslCommunication.Enthernet
+namespace TOPRO.HSL.Enthernet
 {
     /// <summary>
     /// Udp网络的服务器端类

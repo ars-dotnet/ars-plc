@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HslCommunication.LogNet;
+using TOPRO.HSL.LogNet;
 using System.Net.Sockets;
 using System.IO;
 using System.Threading;
 using System.Net;
-using HslCommunication.Core.IMessage;
+using TOPRO.HSL.Core.IMessage;
 
 #if (NET45 || NETSTANDARD2_0)
 using System.Threading.Tasks;
@@ -26,7 +26,7 @@ using System.Threading.Tasks;
 
 
 
-namespace HslCommunication.Core.Net
+namespace TOPRO.HSL.Core.Net
 {
     /// <summary>
     /// 本系统所有网络类的基类，该类为抽象类，无法进行实例化

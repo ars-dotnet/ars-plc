@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 
 
-namespace HslCommunication.Enthernet
+namespace TOPRO.HSL.Enthernet
 {
     /// <summary>
     /// 与服务器文件引擎交互的客户端类，支持操作Advanced引擎和Ultimate引擎

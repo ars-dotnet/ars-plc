@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HslCommunication.Core.IMessage;
+using TOPRO.HSL.Core.IMessage;
 using System.Net.Sockets;
 using System.IO;
 using System.Threading;
-using HslCommunication.BasicFramework;
-using HslCommunication.Enthernet;
+using TOPRO.HSL.BasicFramework;
+using TOPRO.HSL.Enthernet;
 
-namespace HslCommunication.Core.Net
+namespace TOPRO.HSL.Core.Net
 {
     /// <summary>
     /// 包含了主动异步接收的方法实现和文件类异步读写的实现

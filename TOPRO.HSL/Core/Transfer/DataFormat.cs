@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.Core
+namespace TOPRO.HSL.Core
 {
     /// <summary>
     /// 应用于多字节数据的解析或是生成格式

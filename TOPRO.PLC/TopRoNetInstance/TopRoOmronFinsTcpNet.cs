@@ -1,5 +1,5 @@
-﻿using HslCommunication.Core.Net;
-using HslCommunication.Profinet.Omron;
+﻿using TOPRO.HSL.Core.Net;
+using TOPRO.HSL.Profinet.Omron;
 using System;
 using System.Collections.Generic;
 using System.Linq;

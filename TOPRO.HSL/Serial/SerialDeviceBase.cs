@@ -1,11 +1,11 @@
-﻿using HslCommunication.BasicFramework;
-using HslCommunication.Core;
+﻿using TOPRO.HSL.BasicFramework;
+using TOPRO.HSL.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.Serial
+namespace TOPRO.HSL.Serial
 {
     /// <summary>
     /// 基于串口的设备交互类的对象，需要从本类继承，然后实现不同的设备读写操作。

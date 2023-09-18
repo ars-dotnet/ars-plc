@@ -9,7 +9,7 @@ using System.Text;
 
 
 
-namespace HslCommunication.Core.Address
+namespace TOPRO.HSL.Core.Address
 {
     /// <summary>
     /// 所有设备通信类的地址基础类

@@ -1,6 +1,6 @@
-﻿using HslCommunication;
-using HslCommunication.Core;
-using HslCommunication.Core.Net;
+﻿using TOPRO.HSL;
+using TOPRO.HSL.Core;
+using TOPRO.HSL.Core.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;

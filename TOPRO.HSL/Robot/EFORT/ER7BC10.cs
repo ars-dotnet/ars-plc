@@ -1,13 +1,13 @@
-﻿using HslCommunication.Core;
-using HslCommunication.Core.IMessage;
-using HslCommunication.Core.Net;
+﻿using TOPRO.HSL.Core;
+using TOPRO.HSL.Core.IMessage;
+using TOPRO.HSL.Core.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 
-namespace HslCommunication.Robot.EFORT
+namespace TOPRO.HSL.Robot.EFORT
 {
 
     /// <summary>

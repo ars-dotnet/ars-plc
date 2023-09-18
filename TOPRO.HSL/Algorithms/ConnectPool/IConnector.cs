@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.Algorithms.ConnectPool
+namespace TOPRO.HSL.Algorithms.ConnectPool
 {
     /// <summary>
     /// 连接池的接口，连接池的管理对象必须实现此接口

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using TOPRO.PLC.Scheme;
 using TOPRO.PLC.Enums;
 using TOPRO.PLC.Dtos;
-using HslCommunication.Core;
-using HslCommunication.Core.Net;
+using TOPRO.HSL.Core;
+using TOPRO.HSL.Core.Net;
 using Topro.Extension.Plc.Dtos;
 using Topro.Extension.Plc.Scheme;
 

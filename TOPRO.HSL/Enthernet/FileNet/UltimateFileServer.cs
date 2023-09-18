@@ -8,11 +8,11 @@ using System.Threading;
 using System.IO;
 using System.Security.Cryptography;
 using System.Drawing;
-using HslCommunication.BasicFramework;
-using HslCommunication.LogNet;
-using HslCommunication.Core;
+using TOPRO.HSL.BasicFramework;
+using TOPRO.HSL.LogNet;
+using TOPRO.HSL.Core;
 
-namespace HslCommunication.Enthernet
+namespace TOPRO.HSL.Enthernet
 {
     /// <summary>
     /// 终极文件管理服务器，实现所有的文件分类管理，读写分离，不支持直接访问文件名

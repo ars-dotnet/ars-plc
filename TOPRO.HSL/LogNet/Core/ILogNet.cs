@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HslCommunication.LogNet
+namespace TOPRO.HSL.LogNet
 {
     /// <summary>
     /// 一个通用的日志接口

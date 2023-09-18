@@ -1,12 +1,12 @@
-﻿using HslCommunication.Core;
-using HslCommunication.LogNet;
+﻿using TOPRO.HSL.Core;
+using TOPRO.HSL.LogNet;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.Enthernet
+namespace TOPRO.HSL.Enthernet
 {
     /// <summary>
     /// 文件集容器，绑定一个文件夹的文件信息组

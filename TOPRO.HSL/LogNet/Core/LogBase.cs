@@ -1,4 +1,4 @@
-﻿using HslCommunication.Core;
+﻿using TOPRO.HSL.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace HslCommunication.LogNet
+namespace TOPRO.HSL.LogNet
 {
     /// <summary>
     /// 日志存储类的基类，提供一些基础的服务

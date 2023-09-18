@@ -1,11 +1,11 @@
-﻿using HslCommunication.BasicFramework;
-using HslCommunication.Core.IMessage;
+﻿using TOPRO.HSL.BasicFramework;
+using TOPRO.HSL.Core.IMessage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.Core.Net
+namespace TOPRO.HSL.Core.Net
 {
     /// <summary>
     /// 设备类的基类，提供了基础的字节读写方法

@@ -1,11 +1,11 @@
-﻿using HslCommunication.Core;
-using HslCommunication.Serial;
+﻿using TOPRO.HSL.Core;
+using TOPRO.HSL.Serial;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.Profinet.Panasonic
+namespace TOPRO.HSL.Profinet.Panasonic
 {
     /// <summary>
     /// 松下PLC的数据交互协议，采用Mewtocol协议通讯

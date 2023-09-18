@@ -1,11 +1,11 @@
-﻿using HslCommunication.BasicFramework;
-using HslCommunication.Core.Address;
+﻿using TOPRO.HSL.BasicFramework;
+using TOPRO.HSL.Core.Address;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.ModBus
+namespace TOPRO.HSL.ModBus
 {
     /// <summary>
     /// Modbus协议地址格式，可以携带站号，功能码，地址信息

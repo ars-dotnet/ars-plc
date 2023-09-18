@@ -8,11 +8,11 @@ using System.Threading;
 using System.IO;
 using System.Security.Cryptography;
 using System.Drawing;
-using HslCommunication.BasicFramework;
-using HslCommunication.LogNet;
-using HslCommunication.Core;
+using TOPRO.HSL.BasicFramework;
+using TOPRO.HSL.LogNet;
+using TOPRO.HSL.Core;
 
-namespace HslCommunication.Enthernet
+namespace TOPRO.HSL.Enthernet
 {
     /// <summary>
     /// 文件管理类服务器，负责服务器所有分类文件的管理，特点是不支持文件附加数据，但是支持直接访问文件名
@@ -24,7 +24,7 @@ namespace HslCommunication.Enthernet
     /// 以下的示例来自Demo项目，创建了一个简单的服务器对象。
     /// <code lang="cs" source="TestProject\FileNetServer\FormFileServer.cs" region="Advanced Server" title="AdvancedFileServer示例" />
     /// </example>
-    public class AdvancedFileServer : HslCommunication.Core.Net.NetworkFileServerBase
+    public class AdvancedFileServer : TOPRO.HSL.Core.Net.NetworkFileServerBase
     {
 
         #region Constructor

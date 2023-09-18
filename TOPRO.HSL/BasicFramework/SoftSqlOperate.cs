@@ -12,7 +12,7 @@ using System.Data;
 using System.Threading.Tasks;
 #endif
 
-namespace HslCommunication.BasicFramework
+namespace TOPRO.HSL.BasicFramework
 {
     //=================================================================================================
     //

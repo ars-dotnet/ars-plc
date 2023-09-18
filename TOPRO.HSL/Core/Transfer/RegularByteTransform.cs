@@ -13,7 +13,7 @@ using System.Text;
  **********************************************************************************************/
 
 
-namespace HslCommunication.Core
+namespace TOPRO.HSL.Core
 {
 
     /// <summary>

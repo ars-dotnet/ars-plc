@@ -1,4 +1,4 @@
-﻿using HslCommunication;
+﻿using TOPRO.HSL;
 using System;
 using System.Collections.Generic;
 using System.Linq;

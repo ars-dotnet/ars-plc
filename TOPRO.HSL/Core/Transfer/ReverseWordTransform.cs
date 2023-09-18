@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.Core
+namespace TOPRO.HSL.Core
 {
     /// <summary>
     /// 按照字节错位的数据转换类

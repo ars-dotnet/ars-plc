@@ -7,7 +7,7 @@ using System.Management;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace HslCommunication.BasicFramework
+namespace TOPRO.HSL.BasicFramework
 {
     /// <summary>
     /// 软件授权类

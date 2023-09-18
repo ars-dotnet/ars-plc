@@ -1,10 +1,10 @@
-﻿using HslCommunication.BasicFramework;
+﻿using TOPRO.HSL.BasicFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.Core
+namespace TOPRO.HSL.Core
 {
     /// <summary>
     /// 数据转换类的基础，提供了一些基础的方法实现.

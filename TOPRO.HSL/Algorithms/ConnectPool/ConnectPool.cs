@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HslCommunication.ModBus;
+using TOPRO.HSL.ModBus;
 
-namespace HslCommunication.Algorithms.ConnectPool
+namespace TOPRO.HSL.Algorithms.ConnectPool
 {
     /// <summary>
     /// 一个连接池管理器，负责维护多个可用的连接，并且自动清理，扩容
@@ -31,7 +31,7 @@ namespace HslCommunication.Algorithms.ConnectPool
         public ConnectPool( Func<TConnector> createConnector )
         {
             this.CreateConnector = createConnector;
-            hybirdLock = new HslCommunication.Core.SimpleHybirdLock( );
+            hybirdLock = new TOPRO.HSL.Core.SimpleHybirdLock( );
             connectors = new List<TConnector>( );
 
             timerCheck = new System.Threading.Timer( TimerCheckBackground, null, 10000, 30000 );
@@ -172,7 +172,7 @@ namespace HslCommunication.Algorithms.ConnectPool
         private int expireTime = 30;                                       // 连接的过期时间，单位秒
         private bool canGetConnector = true;                               // 是否可以获取连接
         private System.Threading.Timer timerCheck = null;                  // 对象列表检查的时间间隔
-        private HslCommunication.Core.SimpleHybirdLock hybirdLock = null;  // 列表操作的锁
+        private TOPRO.HSL.Core.SimpleHybirdLock hybirdLock = null;  // 列表操作的锁
         private List<TConnector> connectors = null;                        // 所有连接的列表
 
         #endregion

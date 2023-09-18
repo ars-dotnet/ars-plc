@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.Core.IMessage
+namespace TOPRO.HSL.Core.IMessage
 {
     /// <summary>
     /// 西门子Fetch/Write消息解析协议

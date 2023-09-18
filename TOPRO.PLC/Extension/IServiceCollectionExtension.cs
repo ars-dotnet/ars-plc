@@ -1,5 +1,5 @@
-﻿using HslCommunication.Core;
-using HslCommunication.Core.IMessage;
+﻿using TOPRO.HSL.Core;
+using TOPRO.HSL.Core.IMessage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
@@ -29,32 +29,32 @@ namespace TOPRO.PLC.Extension
                 new ServiceDescriptor(
                     typeof(IOperation),
                     typeof(MelsecNetOperation),
-                    ServiceLifetime.Scoped),
+                    ServiceLifetime.Transient),
 
                 new ServiceDescriptor(
                     typeof(IOperation),
                     typeof(MelsecFxSerialNetOperation),
-                    ServiceLifetime.Scoped),
+                    ServiceLifetime.Transient),
 
                 new ServiceDescriptor(
                     typeof(IOperation),
                     typeof(SiemensS7NetOperation),
-                    ServiceLifetime.Scoped),
+                    ServiceLifetime.Transient),
 
                 new ServiceDescriptor(
                     typeof(IOperation),
                     typeof(ModbusNetOperation),
-                    ServiceLifetime.Scoped),
+                    ServiceLifetime.Transient),
 
                 new ServiceDescriptor(
                     typeof(IOperation),
                     typeof(ModbusRtuNetOperation),
-                    ServiceLifetime.Scoped),
+                    ServiceLifetime.Transient),
 
                 new ServiceDescriptor(
                     typeof(IOperation),
                     typeof(OmRonFinsTcpNetOperation),
-                    ServiceLifetime.Scoped),
+                    ServiceLifetime.Transient),
             });
             #endregion
 
@@ -64,68 +64,67 @@ namespace TOPRO.PLC.Extension
                 new ServiceDescriptor(
                     typeof(ITopRoSerialNetOperation),
                     typeof(TopRoMelsecFxSerial),
-                    ServiceLifetime.Scoped),
+                    ServiceLifetime.Transient),
 
                 new ServiceDescriptor(
                     typeof(ITopRoModbusNetOperation),
                     typeof(TopRoModBusTcpNet),
-                    ServiceLifetime.Scoped),
+                    ServiceLifetime.Transient),
 
                 new ServiceDescriptor(
                     typeof(ITopRoModbusNetOperation),
                     typeof(TopRoModBusRtuNet),
-                    ServiceLifetime.Scoped),
+                    ServiceLifetime.Transient),
 
                 new ServiceDescriptor(
                     typeof(ITopRoModbusNetOperation),
                     typeof(TopRoModBusAsciiNet),
-                    ServiceLifetime.Scoped),
-
+                    ServiceLifetime.Transient),
 
                 new ServiceDescriptor(
                     typeof(ITopRoDefaultNetOperation),
                     typeof(TopRoMelsecMcAsciiNet),
-                    ServiceLifetime.Scoped),
+                    ServiceLifetime.Transient),
 
                 new ServiceDescriptor(
                     typeof(ITopRoDefaultNetOperation),
                     typeof(TopRoMelsecMcNet),
-                    ServiceLifetime.Scoped),
+                    ServiceLifetime.Transient),
 
                 new ServiceDescriptor(
                     typeof(ITopRoDefaultNetOperation),
                     typeof(TopRoMelsecA1ENet),
-                    ServiceLifetime.Scoped),
+                    ServiceLifetime.Transient),
 
                 new ServiceDescriptor(
                     typeof(ITopRoDefaultNetOperation),
                     typeof(TopRoSiemensS7S1200Net),
-                    ServiceLifetime.Scoped),
+                    ServiceLifetime.Transient),
 
                 new ServiceDescriptor(
                     typeof(ITopRoDefaultNetOperation),
                     typeof(TopRoSiemensS7S1500Net),
-                    ServiceLifetime.Scoped),
+                    ServiceLifetime.Transient),
 
                 new ServiceDescriptor(
                     typeof(ITopRoDefaultNetOperation),
                     typeof(TopRoSiemensS7S200SmartNet),
-                    ServiceLifetime.Scoped),
+                    ServiceLifetime.Transient),
 
                 new ServiceDescriptor(
                     typeof(ITopRoDefaultNetOperation),
                     typeof(TopRoSiemensS7S300Net),
-                    ServiceLifetime.Scoped),
+                    ServiceLifetime.Transient),
 
                 new ServiceDescriptor(
                     typeof(ITopRoDefaultNetOperation),
                     typeof(TopRoSiemensSiemensFetchWriteNet),
-                    ServiceLifetime.Scoped),
+                    ServiceLifetime.Transient),
 
                 new ServiceDescriptor(
                     typeof(ITopRoOmRonNetOperation),
                     typeof(TopRoOmronFinsTcpNet),
-                    ServiceLifetime.Scoped),
+                    ServiceLifetime.Transient),
             });
             #endregion
 
@@ -189,7 +188,7 @@ namespace TOPRO.PLC.Extension
             #endregion
 
             services.AddSingleton<ITopRoSchemeInstance, TopRoSchemeInstance>();
-            services.AddScoped<IOperationManager, OperationManager>();
+            services.AddTransient<IOperationManager, OperationManager>();
             return services;
         }
     }

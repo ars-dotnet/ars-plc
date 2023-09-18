@@ -10,7 +10,7 @@ using System.Text;
  * 
  **********************************************************************************************/
 
-namespace HslCommunication.Core
+namespace TOPRO.HSL.Core
 {
     /// <summary>
     /// 字节倒序的转换类

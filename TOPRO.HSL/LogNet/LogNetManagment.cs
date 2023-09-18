@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Xml.Linq;
 
-namespace HslCommunication.LogNet
+namespace TOPRO.HSL.LogNet
 {
     /*************************************************************************************
      * 

@@ -1,5 +1,5 @@
-﻿using HslCommunication.Core;
-using HslCommunication.Core.IMessage;
+﻿using TOPRO.HSL.Core;
+using TOPRO.HSL.Core.IMessage;
 using System;
 using System.Collections.Generic;
 using System.Linq;

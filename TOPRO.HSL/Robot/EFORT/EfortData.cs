@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.Robot.EFORT
+namespace TOPRO.HSL.Robot.EFORT
 {
     /// <summary>
     /// 埃夫特机器人的数据结构

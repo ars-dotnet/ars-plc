@@ -6,11 +6,11 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Threading;
-using HslCommunication.BasicFramework;
-using HslCommunication.Enthernet;
-using HslCommunication.LogNet;
+using TOPRO.HSL.BasicFramework;
+using TOPRO.HSL.Enthernet;
+using TOPRO.HSL.LogNet;
 
-namespace HslCommunication.Core
+namespace TOPRO.HSL.Core
 {
     /*******************************************************************************
      * 

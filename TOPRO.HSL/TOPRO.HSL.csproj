@@ -1,48 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
     <RootNamespace>TOPRO.HSL</RootNamespace>
     <AssemblyName>TOPRO.HSL</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <UseWindowsForms>true</UseWindowsForms>
+    <!--<UseWindowsForms>true</UseWindowsForms>-->
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+	<Version>1.6.2</Version>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DocumentationFile>bin\Debug\TOPRO.HSL.xml</DocumentationFile>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Update="Controls\UserButton.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Controls\UserClock.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Controls\UserCurve.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Controls\UserDrum.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Controls\UserGaugeChart.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Controls\UserLantern.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Controls\UserPieChart.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Controls\UserSwitch.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Controls\UserVerticalProgress.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="LogNet\View\LogNetAnalysisControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-  </ItemGroup>
   <ItemGroup>
     <Content Include="Doc.txt" />
     <None Include="imgaes\WebForm%28ASPX%29_815_16x.png" />
@@ -57,5 +26,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="System.Resources.Extensions" Version="6.0.0" />
   </ItemGroup>
 </Project>

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HslCommunication.Core;
+using TOPRO.HSL.Core;
 
-namespace HslCommunication
+namespace TOPRO.HSL
 {
     /// <summary>
     /// 一个包含网络通讯库，PLC访问库，日志库，多线程处理，Modbus服务区客户端，数据转换，版本类，基础控件等工具库
@@ -21,12 +21,12 @@ namespace HslCommunication
     /// 本库提供了C#版本和java版本，java版本的使用和C#几乎是一模一样的。
     /// </summary>
     /// <remarks>
-    /// 本软件著作权归Richard.Hu所有，开源项目地址：<a href="https://github.com/dathlin/HslCommunication">https://github.com/dathlin/HslCommunication</a>  开源协议：LGPL-3.0
+    /// 本软件著作权归Richard.Hu所有，开源项目地址：<a href="https://github.com/dathlin/TOPRO.HSL">https://github.com/dathlin/TOPRO.HSL</a>  开源协议：LGPL-3.0
     /// <br />
     /// 博客地址：<a href="https://www.cnblogs.com/dathlin/p/7703805.html">https://www.cnblogs.com/dathlin/p/7703805.html</a>
     /// <br />
     /// 打赏请扫码：<br />
-    /// <img src="https://raw.githubusercontent.com/dathlin/HslCommunication/master/imgs/support.png" />
+    /// <img src="https://raw.githubusercontent.com/dathlin/TOPRO.HSL/master/imgs/support.png" />
     /// </remarks>
     /// <revisionHistory>
     ///     <revision date="2017-10-21" version="3.7.10" author="Richard.Hu">
@@ -68,9 +68,9 @@ namespace HslCommunication
     ///         <list type="bullet">
     ///             <item>与3.X版本不兼容，谨慎升级。如果要升级，主要涉及的代码包含PLC的数据访问和同步数据通信。</item>
     ///             <item>删除了2个类，OperateResultBytes和OperateResultString类，提供了更加强大方便的泛型继承类，多达10个泛型参数。地址见http://www.cnblogs.com/dathlin/p/7865682.html</item>
-    ///             <item>将部分类从HslCommunication命名空间下移动到HslCommunication.Core下面。</item>
+    ///             <item>将部分类从TOPRO.HSL命名空间下移动到TOPRO.HSL.Core下面。</item>
     ///             <item>提供了一个通用的ModBus TCP的客户端类，方便和服务器交互。</item>
-    ///             <item>完善了HslCommunication.BasicFramework.SoftBaisc下面的辅助用的静态方法，提供了一些方便的数据转化，在上面进行公开。</item>
+    ///             <item>完善了TOPRO.HSL.BasicFramework.SoftBaisc下面的辅助用的静态方法，提供了一些方便的数据转化，在上面进行公开。</item>
     ///         </list>
     ///     </revision>
     ///     <revision date="2017-11-24" version="4.0.1" author="Richard.Hu">

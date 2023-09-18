@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.ModBus
+namespace TOPRO.HSL.ModBus
 {
     /// <summary>
     /// 服务器端提供的数据监视服务

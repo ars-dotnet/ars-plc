@@ -1,10 +1,10 @@
-﻿using HslCommunication.Core.Net;
+﻿using TOPRO.HSL.Core.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.Core
+namespace TOPRO.HSL.Core
 {
     /// <summary>
     /// 所有的和设备或是交互类统一读写标准

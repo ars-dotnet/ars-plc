@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HslCommunication.BasicFramework;
-using HslCommunication.Core;
-using HslCommunication.Core.IMessage;
-using HslCommunication.Core.Net;
+using TOPRO.HSL.BasicFramework;
+using TOPRO.HSL.Core;
+using TOPRO.HSL.Core.IMessage;
+using TOPRO.HSL.Core.Net;
 
-namespace HslCommunication.ModBus
+namespace TOPRO.HSL.ModBus
 {
     /// <summary>
     /// Modbus-Tcp协议的客户端通讯类，方便的和服务器进行数据交互

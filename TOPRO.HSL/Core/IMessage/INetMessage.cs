@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.Core.IMessage
+namespace TOPRO.HSL.Core.IMessage
 {
     /// <summary>
     /// 本系统的消息类，包含了各种解析规则，数据信息提取规则

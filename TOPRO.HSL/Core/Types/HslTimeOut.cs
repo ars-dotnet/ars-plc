@@ -5,9 +5,9 @@ using System.Text;
 using System.Net.Sockets;
 using System.Net;
 using System.Threading;
-using HslCommunication.Core;
+using TOPRO.HSL.Core;
 
-namespace HslCommunication
+namespace TOPRO.HSL
 {
     /****************************************************************************
      * 

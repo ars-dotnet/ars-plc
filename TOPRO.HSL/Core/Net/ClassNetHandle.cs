@@ -10,14 +10,14 @@ using System.Text;
  *    文件名：ClassNetHandle.cs
  *    功能：  网络通信头，标识消息的内容
  *    
- *    这个类公开在HslCommunication下面
+ *    这个类公开在TOPRO.HSL下面
  * 
  *************************************************************************************/
 
 
 
 
-namespace HslCommunication
+namespace TOPRO.HSL
 {
 
 

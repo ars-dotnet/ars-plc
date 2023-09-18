@@ -1,14 +1,14 @@
-﻿using HslCommunication.Core.Net;
+﻿using TOPRO.HSL.Core.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HslCommunication.Core;
+using TOPRO.HSL.Core;
 
 
 
 
-namespace HslCommunication.Enthernet
+namespace TOPRO.HSL.Enthernet
 {
     /// <summary>
     /// 订阅分类的核心组织对象

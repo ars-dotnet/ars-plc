@@ -1,4 +1,4 @@
-﻿using HslCommunication.Profinet.Melsec;
+﻿using TOPRO.HSL.Profinet.Melsec;
 using System;
 using System.Collections.Generic;
 using System.Linq;

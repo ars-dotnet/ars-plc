@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.Language
+namespace TOPRO.HSL.Language
 {
     /// <summary>
     /// 系统的语言基类，默认也即是中文版本

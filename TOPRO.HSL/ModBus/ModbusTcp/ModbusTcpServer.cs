@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HslCommunication.Core;
-using HslCommunication;
-using HslCommunication.Core.Net;
+using TOPRO.HSL.Core;
+using TOPRO.HSL;
+using TOPRO.HSL.Core.Net;
 using System.Net.Sockets;
-using HslCommunication.Core.IMessage;
+using TOPRO.HSL.Core.IMessage;
 
 #if !NETSTANDARD2_0
 using System.IO.Ports;
 #endif
 
-namespace HslCommunication.ModBus
+namespace TOPRO.HSL.ModBus
 {
     /// <summary>
     /// Modbus的虚拟服务器，同时支持Tcp和Rtu的机制，支持线圈，离散输入，寄存器和输入寄存器的读写操作，可以用来当做系统的数据交换池

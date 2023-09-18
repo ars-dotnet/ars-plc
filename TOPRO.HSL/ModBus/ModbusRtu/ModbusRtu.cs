@@ -1,13 +1,13 @@
-﻿using HslCommunication.BasicFramework;
-using HslCommunication.Serial;
+﻿using TOPRO.HSL.BasicFramework;
+using TOPRO.HSL.Serial;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HslCommunication.Core;
-using HslCommunication.Core.Net;
+using TOPRO.HSL.Core;
+using TOPRO.HSL.Core.Net;
 
-namespace HslCommunication.ModBus
+namespace TOPRO.HSL.ModBus
 {
     /// <summary>
     /// Modbus-Rtu通讯协议的类库，多项式码0xA001

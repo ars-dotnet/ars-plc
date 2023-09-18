@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HslCommunication.BasicFramework;
-using HslCommunication.Core;
-using HslCommunication.Core.IMessage;
-using HslCommunication.Core.Net;
+using TOPRO.HSL.BasicFramework;
+using TOPRO.HSL.Core;
+using TOPRO.HSL.Core.IMessage;
+using TOPRO.HSL.Core.Net;
 
-namespace HslCommunication.Profinet.Melsec
+namespace TOPRO.HSL.Profinet.Melsec
 {
 
     /// <summary>

@@ -1,7 +1,7 @@
-﻿using HslCommunication.BasicFramework;
-using HslCommunication.Core;
-using HslCommunication.Core.IMessage;
-using HslCommunication.Core.Net;
+﻿using TOPRO.HSL.BasicFramework;
+using TOPRO.HSL.Core;
+using TOPRO.HSL.Core.IMessage;
+using TOPRO.HSL.Core.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,7 @@ using System.Text;
  * 
  ***********************************************************************************************/
 
-namespace HslCommunication.Profinet.AllenBradley
+namespace TOPRO.HSL.Profinet.AllenBradley
 {
     /// <summary>
     /// AB PLC的数据通讯类，支持读写PLC的节点数据 ->

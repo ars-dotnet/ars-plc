@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication
+namespace TOPRO.HSL
 {
     /// <summary>
     /// 用于PLC通讯及ModBus自定义数据类型的读写操作

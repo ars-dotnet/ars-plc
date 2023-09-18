@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HslCommunication.Core.Net;
-using HslCommunication.Core.IMessage;
-using HslCommunication.Core;
+using TOPRO.HSL.Core.Net;
+using TOPRO.HSL.Core.IMessage;
+using TOPRO.HSL.Core;
 
-namespace HslCommunication.Enthernet
+namespace TOPRO.HSL.Enthernet
 {
 
 

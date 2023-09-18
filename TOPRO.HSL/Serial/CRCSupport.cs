@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.Serial
+namespace TOPRO.HSL.Serial
 {
     /// <summary>
     /// 用于CRC16验证的类，提供了标准的验证方法

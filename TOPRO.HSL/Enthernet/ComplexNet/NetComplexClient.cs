@@ -1,14 +1,14 @@
-﻿using HslCommunication.Core;
+﻿using TOPRO.HSL.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using HslCommunication.Core.Net;
+using TOPRO.HSL.Core.Net;
 using System.Net;
 using System.Net.Sockets;
 
-namespace HslCommunication.Enthernet
+namespace TOPRO.HSL.Enthernet
 {
 
     /// <summary>

@@ -8,7 +8,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.Algorithms.Fourier
+namespace TOPRO.HSL.Algorithms.Fourier
 {
     /// <summary>
     /// 离散傅氏变换的快速算法，处理的信号，适合单周期信号数为2的N次方个，支持变换及逆变换

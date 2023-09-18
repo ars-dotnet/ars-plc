@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.Profinet.AllenBradley
+namespace TOPRO.HSL.Profinet.AllenBradley
 {
     /// <summary>
     /// AB PLC的辅助类，用来辅助生成基本的指令信息

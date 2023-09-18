@@ -1,11 +1,11 @@
-﻿using HslCommunication.Core;
-using HslCommunication.Serial;
+﻿using TOPRO.HSL.Core;
+using TOPRO.HSL.Serial;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HslCommunication.Profinet.Melsec
+namespace TOPRO.HSL.Profinet.Melsec
 {
     /// <summary>
     /// 三菱的串口通信的对象，适用于读取FX系列的串口数据
