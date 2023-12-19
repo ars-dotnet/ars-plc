@@ -1,12 +1,11 @@
-﻿using TOPRO.HSL.Core;
-using TOPRO.HSL.Core.Net;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Topro.Extension.Plc.Dtos;
 using Topro.Extension.Plc.Scheme;
+using TOPRO.HSL.Core.Net;
 using TOPRO.PLC.Dtos;
 using TOPRO.PLC.Enums;
 using TOPRO.PLC.Scheme;
@@ -14,25 +13,27 @@ using TOPRO.PLC.Scheme;
 namespace TOPRO.PLC.TopRoOperations
 {
     /// <summary>
-    /// modbustcp操作类
+    /// 汇川操作类
     /// </summary>
-    internal class ModbusNetOperation : BaseTcpOperation
+    internal class InovanceNetOperation : ModbusNetOperation
     {
-        protected override PlcProtocolLevel PlcProtocolLevel => PlcProtocolLevel.ModBusTcp;
+        protected override PlcProtocolLevel PlcProtocolLevel => PlcProtocolLevel.InovanceTcp;
 
-        public ModbusNetOperation(
+        public InovanceNetOperation(
             IEnumerable<IPlcProvider> plcProvider,
-            IEnumerable<ITopRoNetSchemeProvider> netSchemeProvider) 
+            IEnumerable<ITopRoNetSchemeProvider> netSchemeProvider)
             : base(plcProvider, netSchemeProvider)
         {
-            PlcType = PlcType.Modbus;
+            PlcType = PlcType.Inovance;
+
+            //汇川走的modbus tcp连接
             ProtocolType = ProtocolType.Modbus_Tcp;
         }
 
-        protected override ITopRoNetScheme GetTopRoNetScheme(OperationDto input, INetOperation? netOperation = null) 
+        protected override ITopRoNetScheme GetTopRoNetScheme(OperationDto input, INetOperation? netOperation = null)
         {
-            ModbusOperationDto dto = (ModbusOperationDto)input;
-            var scheme = new TopRoModBusScheme
+            InovanceOperationDto dto = (InovanceOperationDto)input;
+            var scheme = new TopRoInovanceScheme
             {
                 NetOperation = netOperation,
 

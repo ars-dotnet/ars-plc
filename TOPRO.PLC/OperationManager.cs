@@ -24,6 +24,11 @@ namespace TOPRO.PLC
         private IOperation? _operation;
 
         /// <summary>
+        /// 连接id
+        /// </summary>
+        public string? ConnectionId => _operation?.ConnectionId;
+
+        /// <summary>
         /// 默认tcp初始化
         /// </summary>
         /// <param name="input"></param>
@@ -76,6 +81,17 @@ namespace TOPRO.PLC
         public OperateResult OmRonConnectionAndInit(OmRonFinsTcpOperationDto input, bool longConnection = true)
         {
             return ConnectionAndInit(input, longConnection, 1);
+        }
+
+        /// <summary>
+        /// 汇川初始化
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="longConnection"></param>
+        /// <returns></returns>
+        public OperateResult InovanceConnectionAndInit(InovanceOperationDto input, bool longConnection = true)
+        {
+            return ModbusConnectionAndInit(input, longConnection);
         }
 
         /// <summary>

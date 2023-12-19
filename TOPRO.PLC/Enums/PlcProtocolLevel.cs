@@ -17,5 +17,7 @@ namespace TOPRO.PLC.Enums
         ModBusRtuorAscii = 3,
 
         OmRonFinsTcp = 4,
+
+        InovanceTcp = 5,
     }
 }

@@ -8,6 +8,8 @@ namespace TOPRO.HSL.Core.Net
 {
     public interface INetConnection : IDefaultNetOperation
     {
+        public string ConnectionId { get; }
+
         public OperateResult ConnectServer();
 
         public OperateResult ConnectServer(AlienSession session);

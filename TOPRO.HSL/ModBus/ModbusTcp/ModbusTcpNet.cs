@@ -457,7 +457,13 @@ namespace TOPRO.HSL.ModBus
         /// <returns>带有成功标志的bool数组对象</returns>
         public OperateResult<bool[]> ReadCoil( string address, ushort length )
         {
-            var read = ReadModBusBase( ModbusInfo.ReadCoil, address, length );
+            OperateResult<string> operateResult = TranslateToModbusAddress(address, 1);
+            if (!operateResult.IsSuccess)
+            {
+                return OperateResult.CreateFailedResult<bool[]>(operateResult);
+            }
+
+            var read = ReadModBusBase( ModbusInfo.ReadCoil, operateResult.Content, length );
             if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( read );
 
             return OperateResult.CreateSuccessResult( SoftBasic.ByteToBoolArray( read.Content, length ) );
@@ -516,7 +522,13 @@ namespace TOPRO.HSL.ModBus
         /// </example>
         public override OperateResult<byte[]> Read( string address, ushort length )
         {
-            OperateResult<ModbusAddress> analysis = ModbusInfo.AnalysisReadAddress( address, isAddressStartWithZero );
+            OperateResult<string> operateResult = TranslateToModbusAddress(address, 3);
+            if (!operateResult.IsSuccess)
+            {
+                return OperateResult.CreateFailedResult<byte[]>(operateResult);
+            }
+
+            OperateResult<ModbusAddress> analysis = ModbusInfo.AnalysisReadAddress(operateResult.Content, isAddressStartWithZero );
             if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( analysis );
 
             List<byte> lists = new List<byte>( );
@@ -600,7 +612,13 @@ namespace TOPRO.HSL.ModBus
         /// </example>
         public override OperateResult Write( string address, byte[] value )
         {
-            OperateResult<byte[]> command = BuildWriteRegisterCommand( address, value );
+            OperateResult<string> operateResult = TranslateToModbusAddress(address, 16);
+            if (!operateResult.IsSuccess)
+            {
+                return operateResult;
+            }
+
+            OperateResult<byte[]> command = BuildWriteRegisterCommand(operateResult.Content, value );
             if (!command.IsSuccess) return command;
 
             return CheckModbusTcpResponse( command.Content );
@@ -619,7 +637,13 @@ namespace TOPRO.HSL.ModBus
         /// <returns>返回写入结果</returns>
         public OperateResult WriteCoil( string address, bool value )
         {
-            OperateResult<byte[]> command = BuildWriteOneCoilCommand( address, value );
+            OperateResult<string> operateResult = TranslateToModbusAddress(address, 5);
+            if (!operateResult.IsSuccess)
+            {
+                return operateResult;
+            }
+
+            OperateResult<byte[]> command = BuildWriteOneCoilCommand(operateResult.Content, value );
             if (!command.IsSuccess) return command;
 
             return CheckModbusTcpResponse( command.Content );
@@ -633,7 +657,13 @@ namespace TOPRO.HSL.ModBus
         /// <returns>返回写入结果</returns>
         public OperateResult WriteCoil(string address, bool[] values )
         {
-            OperateResult<byte[]> command = BuildWriteCoilCommand( address, values );
+            OperateResult<string> operateResult = TranslateToModbusAddress(address, 15);
+            if (!operateResult.IsSuccess)
+            {
+                return operateResult;
+            }
+
+            OperateResult<byte[]> command = BuildWriteCoilCommand(operateResult.Content, values );
             if (!command.IsSuccess) return command;
 
             return CheckModbusTcpResponse( command.Content );
@@ -681,6 +711,27 @@ namespace TOPRO.HSL.ModBus
         }
 
         #endregion
-        
+
+        //
+        // 摘要:
+        //     将当前的地址信息转换成Modbus格式的地址，如果转换失败，返回失败的消息。默认不进行任何的转换。
+        //     Convert the current address information into a Modbus format address. If the
+        //     conversion fails, a failure message will be returned. No conversion is performed
+        //     by default.
+        //
+        // 参数:
+        //   address:
+        //     传入的地址
+        //
+        //   modbusCode:
+        //     Modbus的功能码
+        //
+        // 返回结果:
+        //     转换之后Modbus的地址
+        public virtual OperateResult<string> TranslateToModbusAddress(string address, byte modbusCode) 
+        {
+            return OperateResult.CreateSuccessResult(address);
+        }
+
     }
 }

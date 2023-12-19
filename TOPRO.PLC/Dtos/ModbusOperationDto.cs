@@ -9,6 +9,11 @@ namespace Topro.Extension.Plc.Dtos
 {
     public class ModbusOperationDto : DefaultOperationDto
     {
+        public ModbusOperationDto()
+        {
+            DataFormat = DataFormat.ABCD;
+        }
+
         /// <summary>
         /// 站号
         /// </summary>
@@ -24,6 +29,6 @@ namespace Topro.Extension.Plc.Dtos
         /// </summary>
         public bool IsStringReverse { get; set; }
 
-        public DataFormat DataFormat { get; set; } = DataFormat.ABCD;
+        public DataFormat DataFormat { get; set; }
     }
 }

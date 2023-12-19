@@ -30,7 +30,7 @@ namespace TOPRO.PLC.Enums
 
         Serial = 4,
 
-        #endregion
+        #endregion 三菱协议
 
         #region 西门子协议
 
@@ -46,7 +46,7 @@ namespace TOPRO.PLC.Enums
 
         #endregion 西门子协议
 
-        #region Modbus
+        #region Modbus协议
 
         Modbus_Tcp = 41,
 
@@ -54,12 +54,12 @@ namespace TOPRO.PLC.Enums
 
         Modbus_ASCII = 43,
 
-        #endregion Modbus
+        #endregion Modbus协议
 
-        #region OmRon
+        #region OmRon协议
 
         FinsTcp = 51,
 
-        #endregion
+        #endregion OmRon协议
     }
 }

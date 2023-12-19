@@ -30,5 +30,10 @@ namespace TOPRO.PLC.Enums
         /// 欧姆龙
         /// </summary>
         OmRon = 4,
+
+        /// <summary>
+        /// 汇川
+        /// </summary>
+        Inovance = 5,
     }
 }

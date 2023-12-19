@@ -14,6 +14,7 @@ using TOPRO.PLC.Dtos;
 using TOPRO.PLC.Enums;
 using TOPRO.PLC.TopRoNetOperation;
 using TOPRO.PLC.TopRoOperations;
+using TOPRO.HSL.Inovance;
 
 namespace TOPRO.PLC
 {
@@ -182,6 +183,45 @@ namespace TOPRO.PLC
             plc.SA1 = dto.SA1;
             plc.DA1 = dto.DA1;
             plc.DA2 = dto.DA2;
+
+            return plc;
+        }
+    }
+
+    internal class InovancePlcProvider : IPlcProvider
+    {
+        private readonly IServiceScopeFactory _scopeFactory;
+
+        public PlcProtocolLevel PlcProtocolLevel { get; }
+
+        public InovancePlcProvider(IServiceScopeFactory scopeFactory)
+        {
+            _scopeFactory = scopeFactory;
+            PlcProtocolLevel = PlcProtocolLevel.InovanceTcp;
+        }
+
+        public INetOperation Resolve(OperationDto input)
+        {
+            using var scope = _scopeFactory.CreateScope();
+            var netOperationPlcs = scope.ServiceProvider.GetRequiredService<IEnumerable<ITopRoInovanceNetOperation>>();
+
+            InovanceOperationDto dto = (InovanceOperationDto)input;
+            var plc = netOperationPlcs.FirstOrDefault(
+                r =>
+                    r.PlcType == input.PlcType &&
+                    r.ProtocolType == input.ProtocolType);
+            if (null == plc)
+            {
+                throw new Exception($"plctype:{input.PlcType},protocolType:{input.ProtocolType}实例未注册");
+            }
+
+            plc.IpAddress = dto.IpAddress;
+            plc.Port = dto.Port;
+            plc.Station = dto.Station;
+            plc.AddressStartWithZero = dto.AddressStartWithZero;
+            plc.IsStringReverse = dto.IsStringReverse;
+            plc.DataFormat = dto.DataFormat;
+            plc.Series = dto.Series;
 
             return plc;
         }

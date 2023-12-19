@@ -11,9 +11,9 @@ using TOPRO.PLC.Scheme;
 namespace TOPRO.PLC.TopRoOperations
 {
     /// <summary>
-    /// 西门子操作类
+    /// 西门子S7操作类
     /// </summary>
-    public class SiemensS7NetOperation : BaseOperation
+    public class SiemensS7NetOperation : BaseTcpOperation
     {
         protected override PlcProtocolLevel PlcProtocolLevel => PlcProtocolLevel.DefaultTcp;
 

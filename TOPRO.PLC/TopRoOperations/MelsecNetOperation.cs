@@ -12,9 +12,9 @@ using TOPRO.PLC.TopRoOperations;
 namespace TOPRO.PLC.MelsecOperations
 {
     /// <summary>
-    /// 默认操作类
+    /// 三菱默认操作类
     /// </summary>
-    internal class MelsecNetOperation :BaseOperation
+    internal class MelsecNetOperation :BaseTcpOperation
     {
         protected override PlcProtocolLevel PlcProtocolLevel => PlcProtocolLevel.DefaultTcp;
 

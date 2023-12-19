@@ -230,6 +230,90 @@ namespace TOPRO.HSL.BasicFramework
             }
         }
 
+        //
+        // 摘要:
+        //     将指定的数据按照指定长度进行分割，例如int[10]，指定长度4，就分割成int[4],int[4],int[2]，然后拼接list
+        //     Divide the specified data according to the specified length, such as int [10],
+        //     and specify the length of 4 to divide into int [4], int [4], int [2], and then
+        //     concatenate the list
+        //
+        // 参数:
+        //   array:
+        //     等待分割的数组
+        //
+        //   length:
+        //     指定的长度信息
+        //
+        // 类型参数:
+        //   T:
+        //     数组的类型
+        //
+        // 返回结果:
+        //     分割后结果内容
+        public static List<T[]> ArraySplitByLength<T>(T[] array, int length)
+        {
+            if (array == null)
+            {
+                return new List<T[]>();
+            }
+
+            List<T[]> list = new List<T[]>();
+            int num = 0;
+            while (num < array.Length)
+            {
+                if (num + length < array.Length)
+                {
+                    T[] array2 = new T[length];
+                    Array.Copy(array, num, array2, 0, length);
+                    num += length;
+                    list.Add(array2);
+                }
+                else
+                {
+                    T[] array3 = new T[array.Length - num];
+                    Array.Copy(array, num, array3, 0, array3.Length);
+                    num += length;
+                    list.Add(array3);
+                }
+            }
+
+            return list;
+        }
+
+        //
+        // 摘要:
+        //     将整数进行有效的拆分成数组，指定每个元素的最大值
+        //     Effectively split integers into arrays, specifying the maximum value for each
+        //     element
+        //
+        // 参数:
+        //   integer:
+        //     整数信息
+        //
+        //   everyLength:
+        //     单个的数组长度
+        //
+        // 返回结果:
+        //     拆分后的数组长度
+        public static int[] SplitIntegerToArray(int integer, int everyLength)
+        {
+            int[] array = new int[integer / everyLength + ((integer % everyLength != 0) ? 1 : 0)];
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (i == array.Length - 1)
+                {
+                    array[i] = ((integer % everyLength == 0) ? everyLength : (integer % everyLength));
+                }
+                else
+                {
+                    array[i] = everyLength;
+                }
+            }
+
+            return array;
+        }
+
+
         #endregion
 
         #region Byte Array compare

@@ -16,7 +16,10 @@ using TOPRO.PLC.TopRoOperations;
 
 namespace Topro.Extension.Plc.TopRoOperations
 {
-    internal class OmRonFinsTcpNetOperation : BaseOperation
+    /// <summary>
+    /// omron操作类
+    /// </summary>
+    internal class OmRonFinsTcpNetOperation : BaseTcpOperation
     {
         protected override PlcProtocolLevel PlcProtocolLevel => PlcProtocolLevel.OmRonFinsTcp;
 
@@ -29,59 +32,26 @@ namespace Topro.Extension.Plc.TopRoOperations
             ProtocolType = ProtocolType.FinsTcp;
         }
 
-        public override void Excuting(OperationDto input, out bool hasConnected)
+        protected override ITopRoNetScheme GetTopRoNetScheme(OperationDto input, INetOperation? netOperation = null)
         {
             OmRonFinsTcpOperationDto dto = (OmRonFinsTcpOperationDto)input;
-            hasConnected = false;
 
-            if (LongConnection)
+            var scheme = new TopRoOmRonFinsTcpScheme
             {
-                ITopRoNetScheme? scheme = 
-                    _netSchemeProvider.GetScheme(
-                        new TopRoOmRonFinsTcpScheme
-                        {
-                            IpAddress = dto.IpAddress,
-                            Port = dto.Port,
-                            SA1 = dto.SA1,
-                            DA1 = dto.DA1,
-                            DA2 = dto.DA2,
-                            PlcType = PlcType,
-                            ProtocolType = ProtocolType,
-                        });
+                NetOperation = netOperation,
 
-                if (null != scheme)
-                {
-                    TopRoNetScheme = scheme;
-                    hasConnected = true;
-                }
-                else
-                {
-                    Init(input);
-                }
-            }
-            else
-            {
-                Init(input);
-            }
-        }
-
-        protected override void Init(OperationDto input)
-        {
-            INetOperation opt = _provider.Resolve(input);
-
-            OmRonFinsTcpOperationDto dto = (OmRonFinsTcpOperationDto)input;
-            TopRoNetScheme = new TopRoOmRonFinsTcpScheme
-            {
-                NetOperation = opt,
                 IpAddress = dto.IpAddress,
                 Port = dto.Port,
-                PlcType = PlcType,
-                ProtocolType = ProtocolType,
 
                 SA1 = dto.SA1,
                 DA1 = dto.DA1,
                 DA2 = dto.DA2,
+
+                PlcType = PlcType,
+                ProtocolType = ProtocolType,
             };
+
+            return scheme;
         }
     }
 }

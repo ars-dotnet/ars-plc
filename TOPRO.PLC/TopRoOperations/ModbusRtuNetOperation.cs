@@ -13,7 +13,10 @@ using Topro.Extension.Plc.Scheme;
 
 namespace TOPRO.PLC.TopRoOperations
 {
-    internal class ModbusRtuNetOperation : MelsecFxSerialNetOperation
+    /// <summary>
+    /// modbusrtu串口操作类
+    /// </summary>
+    internal class ModbusRtuNetOperation : BaseSerialOperation
     {
         protected override PlcProtocolLevel PlcProtocolLevel => PlcProtocolLevel.ModBusRtuorAscii;
         
@@ -24,80 +27,30 @@ namespace TOPRO.PLC.TopRoOperations
         {
             PlcType = PlcType.Modbus;
             ProtocolType = ProtocolType.Modbus_Rtu;
+
             Order = 1;
         }
 
-        public override void Excuting(OperationDto input, out bool hasConnected)
+        protected override ITopRoNetScheme GetTopRoNetScheme(OperationDto input, INetOperation? netOperation = null)
         {
             ModbusRtuOperationDto dto = (ModbusRtuOperationDto)input;
 
-            hasConnected = false;
-            if (LongConnection)
+            var scheme = new TopRoModBusRtuScheme
             {
-                ITopRoNetScheme? scheme = 
-                    _netSchemeProvider.GetScheme(
-                        new TopRoModBusRtuScheme
-                        {
-                            PortName = dto.PortName,
-                            BaudRate = dto.BaudRate,
-                            DataBits = dto.DataBits,
-                            StopBits = dto.StopBits,
-                            Parity = dto.Parity,
+                NetOperation = netOperation,
 
-                            Station = dto.Station,
-                            PlcType = PlcType,
-                            ProtocolType = ProtocolType
-                        });
-
-                if (null != scheme)
-                {
-                    TopRoNetScheme = scheme;
-                    hasConnected = true;
-                }
-                else
-                {
-                    Init(input);
-                }
-            }
-            else 
-            {
-                Init(input);
-            }
-        }
-
-        protected override void Init(OperationDto input)
-        {
-            INetOperation opt = _provider.Resolve(input);
-            ModbusRtuOperationDto dto = (ModbusRtuOperationDto)input;
-            TopRoNetScheme = new TopRoModBusRtuScheme
-            {
-                NetOperation = opt,
                 PortName = dto.PortName,
                 BaudRate = dto.BaudRate,
                 DataBits = dto.DataBits,
                 StopBits = dto.StopBits,
                 Parity = dto.Parity,
                 Station = dto.Station,
+
                 PlcType = PlcType,
                 ProtocolType = ProtocolType
             };
 
-            SerialNetOperation.SerialPortInni(sp =>
-            {
-                sp.PortName = dto.PortName;
-                sp.BaudRate = dto.BaudRate;
-                sp.DataBits = dto.DataBits;
-                sp.StopBits = dto.StopBits == 0
-                    ? System.IO.Ports.StopBits.None
-                    : dto.StopBits == 1
-                        ? System.IO.Ports.StopBits.One
-                        : System.IO.Ports.StopBits.Two;
-                sp.Parity = dto.Parity == 0
-                    ? System.IO.Ports.Parity.None
-                    : dto.Parity == 1
-                        ? System.IO.Ports.Parity.Odd
-                        : System.IO.Ports.Parity.Even;
-            });
+            return scheme;
         }
     }
 }

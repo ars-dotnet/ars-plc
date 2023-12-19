@@ -16,6 +16,7 @@ using TOPRO.PLC.Scheme;
 using TOPRO.PLC.TopRoNetInstance;
 using TOPRO.PLC.TopRoNetOperation;
 using TOPRO.PLC.TopRoOperations;
+using TOPRO.PLC.Scheme.Provider;
 
 namespace TOPRO.PLC.Extension
 {
@@ -54,6 +55,11 @@ namespace TOPRO.PLC.Extension
                 new ServiceDescriptor(
                     typeof(IOperation),
                     typeof(OmRonFinsTcpNetOperation),
+                    ServiceLifetime.Transient),
+
+                new ServiceDescriptor(
+                    typeof(IOperation),
+                    typeof(InovanceNetOperation),
                     ServiceLifetime.Transient),
             });
             #endregion
@@ -125,6 +131,11 @@ namespace TOPRO.PLC.Extension
                     typeof(ITopRoOmRonNetOperation),
                     typeof(TopRoOmronFinsTcpNet),
                     ServiceLifetime.Transient),
+
+                new ServiceDescriptor(
+                    typeof(ITopRoInovanceNetOperation),
+                    typeof(TopRoInovanceNet),
+                    ServiceLifetime.Transient),
             });
             #endregion
 
@@ -150,9 +161,15 @@ namespace TOPRO.PLC.Extension
                     typeof(ITopRoNetSchemeProvider),
                     typeof(TopRoNetModbusRtuSchemeProvider),
                     ServiceLifetime.Singleton),
+
                 new ServiceDescriptor(
                     typeof(ITopRoNetSchemeProvider),
                     typeof(TopRoNetOmRonSchemeProvider),
+                    ServiceLifetime.Singleton),
+
+                new ServiceDescriptor(
+                    typeof(ITopRoNetSchemeProvider),
+                    typeof(TopRoNetInovanceSchemeProvider),
                     ServiceLifetime.Singleton),
             });
             #endregion
@@ -183,6 +200,11 @@ namespace TOPRO.PLC.Extension
                 new ServiceDescriptor(
                     typeof(IPlcProvider),
                     typeof(OmRonPlcProvider),
+                    ServiceLifetime.Singleton),
+
+                new ServiceDescriptor(
+                    typeof(IPlcProvider),
+                    typeof(InovancePlcProvider),
                     ServiceLifetime.Singleton),
             });
             #endregion

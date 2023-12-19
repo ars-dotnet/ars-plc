@@ -13,6 +13,11 @@ namespace TOPRO.PLC
     public interface IOperationManager : IDisposable
     {
         /// <summary>
+        /// 连接id
+        /// </summary>
+        string? ConnectionId { get; }
+
+        /// <summary>
         /// 默认tcp初始化
         /// </summary>
         /// <param name="input"></param>
@@ -51,6 +56,14 @@ namespace TOPRO.PLC
         /// <param name="longConnection"></param>
         /// <returns></returns>
         OperateResult OmRonConnectionAndInit(OmRonFinsTcpOperationDto input, bool longConnection = true);
+
+        /// <summary>
+        /// 汇川初始化
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="longConnection"></param>
+        /// <returns></returns>
+        OperateResult InovanceConnectionAndInit(InovanceOperationDto input, bool longConnection = true);
 
         /// <summary>
         /// 断开连接
@@ -101,5 +114,6 @@ namespace TOPRO.PLC
         /// <param name="pams"></param>
         /// <returns></returns>
         OperateResult Write(Type datatype, Dictionary<string, object> pams);
+
     }
 }

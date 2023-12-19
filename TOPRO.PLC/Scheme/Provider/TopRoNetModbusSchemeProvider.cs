@@ -9,9 +9,7 @@ namespace Topro.Extension.Plc.Scheme
 {
     public class TopRoNetModbusSchemeProvider : BaseTopRoNetSchemeProvider
     {
-        public TopRoNetModbusSchemeProvider(
-            ITopRoSchemeInstance instance)
-            : base(instance)
+        public TopRoNetModbusSchemeProvider(ITopRoSchemeInstance instance) : base(instance)
         {
             PlcProtocolLevel = TOPRO.PLC.Enums.PlcProtocolLevel.ModBusTcp;
         }

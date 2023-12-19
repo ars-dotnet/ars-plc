@@ -20,13 +20,17 @@ namespace TOPRO.PLC.TopRoOperations
     public interface IOperation : ITopRoPlcType
     {
         /// <summary>
+        /// 连接id
+        /// </summary>
+        string? ConnectionId { get; }
+
+        /// <summary>
         /// 值=1表示默认实例
         /// </summary>
         int Order { get; }
 
         /// <summary>
         /// 是否长连接
-        /// 默认都是长连接，即客户端请求后不释放连接
         /// </summary>
         bool LongConnection { get; set; }
 
@@ -35,7 +39,7 @@ namespace TOPRO.PLC.TopRoOperations
         /// </summary>
         ConnectState ConnectState { get; set; }
 
-        IReadWriteNet ReadWriteNet { get; }
+        IReadWriteNet? ReadWriteNet { get; }
 
         /// <summary>
         /// 操作前执行
