@@ -120,7 +120,7 @@ namespace TOPRO.HSL.ModBus
         }
 
 
-#if !NETSTANDARD2_0
+#if !NETSTANDARD2_1
 
         /// <summary>
         /// 将modbus指令打包成Modbus-Rtu指令

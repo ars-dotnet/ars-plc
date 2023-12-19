@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
     <RootNamespace>TOPRO.HSL</RootNamespace>
     <AssemblyName>TOPRO.HSL</AssemblyName>
@@ -8,6 +8,7 @@
     <!--<UseWindowsForms>true</UseWindowsForms>-->
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
 	<Version>1.6.2</Version>
+	<LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DocumentationFile>bin\Debug\TOPRO.HSL.xml</DocumentationFile>
