@@ -33,7 +33,7 @@ namespace TOPRO.Test
             var intdata = operationManager.Read<int>($"{dbNamePrefix}{dbFrom + 20}");
             Assert.True(6666 == intdata.Content);
 
-            //int
+            //long
             res = operationManager.Write($"{dbNamePrefix}{dbFrom + 30}", 99999999999999);
             Assert.True(res.IsSuccess);
             var longdata = operationManager.Read<long>($"{dbNamePrefix}{dbFrom + 30}");
@@ -83,7 +83,7 @@ namespace TOPRO.Test
             Assert.True(6666 == intdata.Content[0]);
             Assert.True(7777 == intdata.Content[1]);
 
-            //int
+            //long
             res = operationManager.Write($"{dbNamePrefix}{dbFrom + 30}", new long[] { 99999999999999, 8888888888888888 });
             Assert.True(res.IsSuccess);
             var longdata = operationManager.Read<long[]>($"{dbNamePrefix}{dbFrom + 30}", 2);
