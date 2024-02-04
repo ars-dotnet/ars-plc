@@ -119,8 +119,6 @@ namespace TOPRO.PLC.TopRoOperations
 
                 _netSchemeProvider.RemoveScheme(TopRoNetScheme!);
 
-                TopRoNetScheme = default;
-
                 ConnectState = ConnectState.Disconnected;
             }
             catch (Exception e)

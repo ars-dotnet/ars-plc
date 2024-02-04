@@ -52,7 +52,7 @@ namespace TOPRO.Test
         /// 汇川PLC测试
         /// </summary>
         [Theory]
-        [InlineData("127.0.0.1", 502, PlcType.Inovance, ProtocolType.Modbus_Tcp,"M",200)]
+        [InlineData("127.0.0.1", 502, PlcType.Inovance, ProtocolType.Modbus_Tcp,"MW",200)]
         public void TestInovance(
             string ip,int port,
             PlcType plcType, ProtocolType protocolType,
@@ -66,7 +66,7 @@ namespace TOPRO.Test
 
                 Station = 1,
                 AddressStartWithZero = true,
-                Series = InovanceSeries.H3U,
+                Series = InovanceSeries.AM,
                 IsStringReverse = false,
 
                 PlcType = plcType,
@@ -92,6 +92,8 @@ namespace TOPRO.Test
             var booldatas = _operationManager.Read<bool[]>($"{dbNamePrefix}{dbFrom + 100}", 2);
             Assert.True(true == booldatas.Content[0]);
             Assert.True(true == booldatas.Content[1]);
+
+            _operationManager.CloseConnection();
         }
 
         /// <summary>
@@ -134,6 +136,8 @@ namespace TOPRO.Test
             var booldatas = _operationManager.Read<bool[]>($"M{dbFrom + 100}", 2);
             Assert.True(true == booldatas.Content[0]);
             Assert.True(true == booldatas.Content[1]);
+
+            _operationManager.CloseConnection();
         }
 
         /// <summary>
@@ -177,6 +181,8 @@ namespace TOPRO.Test
             var booldatas = _operationManager.Read<bool[]>($"{dbNamePrefix}{dbFrom + 100}", 2);
             Assert.False(booldatas.IsSuccess);
             Assert.True(null == booldatas.Content);
+
+            _operationManager.CloseConnection();
         }
 
         /// <summary>
@@ -222,6 +228,8 @@ namespace TOPRO.Test
             var booldatas = _operationManager.Read<bool[]>($"{dbNamePrefix}{dbFrom + 100}", 2);
             Assert.True(true == booldatas.Content[0]);
             Assert.True(true == booldatas.Content[1]);
+
+            _operationManager.CloseConnection();
         }
 
         /// <summary>
@@ -262,6 +270,8 @@ namespace TOPRO.Test
             var booldatas = _operationManager.Read<bool[]>($"{dbNamePrefix}{dbFrom + 100}", 2);
             Assert.True(true == booldatas.Content[0]);
             Assert.True(true == booldatas.Content[1]);
+
+            _operationManager.CloseConnection();
         }
 
         /// <summary>
@@ -294,6 +304,8 @@ namespace TOPRO.Test
             Assert.True(true == data[0]);
             Assert.True(false == data[1]);
             Assert.True(true == data[2]);
+
+            _operationManager.CloseConnection();
         }
 
         /// <summary>
@@ -329,6 +341,8 @@ namespace TOPRO.Test
 
             Assert.True("你好" == res.Content[0]);
             Assert.True("test" == res.Content[1]);
+
+            _operationManager.CloseConnection();
         }
 
         /// <summary>
@@ -387,6 +401,9 @@ namespace TOPRO.Test
             });
 
             Assert.True(operation1.ConnectionId == operation2.ConnectionId);
+
+            operation1.CloseConnection();
+            operation2.CloseConnection();
         }
     }
 }

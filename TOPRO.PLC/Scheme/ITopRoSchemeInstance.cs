@@ -30,24 +30,24 @@ namespace TOPRO.PLC.Scheme
             if (Instance.Any()) 
             {
                 PlcProtocolLevel[] levels = new[] { PlcProtocolLevel.Serial , PlcProtocolLevel.ModBusRtuorAscii };
-                var serial = Instance.
+                var serials = Instance.
                     Where(r => levels.Contains(r.PlcProtocolLevel)).
                     Select(r => (ITopRoSerialScheme)r);
-                if (serial.Any()) 
+                if (serials.Any()) 
                 {
-                    foreach (var se in serial) 
+                    foreach (var se in serials) 
                     {
                         ((ISerialNetOperation)se.NetOperation).Close();
-                    }
 
-                    Instance.RemoveWhere(r => levels.Contains(r.PlcProtocolLevel));
+                        Instance.Remove(se);
+                    }
                 }
 
                 if (Instance.Any())
                 {
                     foreach (var i in Instance) 
                     {
-                        ((INetConnection)i).ConnectClose();
+                        ((INetConnection)i.NetOperation).ConnectClose();
                     }
 
                     Instance.Clear();
