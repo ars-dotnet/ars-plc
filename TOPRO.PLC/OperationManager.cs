@@ -231,7 +231,12 @@ namespace TOPRO.PLC
             }
             else
             {
-                var data = (T)Convert.ChangeType(res.Content?.Replace("\0", "")?.Split(','), typeof(T))!;
+                var arrays = res.Content?
+                        .Split(new char[] { '\0', ',' })
+                        .Where(r => !string.IsNullOrEmpty(r))
+                        .ToArray();
+
+                var data = (T)Convert.ChangeType(arrays, typeof(T))!;
                 return OperateResult.CreateSuccessResult(data);
             }
         }

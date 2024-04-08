@@ -405,5 +405,67 @@ namespace TOPRO.Test
             operation1.CloseConnection();
             operation2.CloseConnection();
         }
+
+        /// <summary>
+        /// ModbusTcp读写测试
+        /// </summary>
+        [Theory]
+        [InlineData("127.0.0.1", 502, PlcType.Modbus, ProtocolType.Modbus_Tcp)]
+        public void TestModbus123(
+            string ip, int port,
+            PlcType plcType, ProtocolType protocolType)
+        {
+            using var _operationManager = _serviceProvider.GetRequiredService<IOperationManager>();
+            var res = _operationManager.ModbusConnectionAndInit(new ModbusOperationDto()
+            {
+                IpAddress = ip,
+                Port = port,
+
+                Station = 1,
+                AddressStartWithZero = true,
+                IsStringReverse = false,
+
+                PlcType = plcType,
+                ProtocolType = protocolType
+            }, longConnection: false);
+            Assert.True(res.IsSuccess);
+
+            //bool
+            var data = _operationManager.Read<int>("3");
+
+            _operationManager.CloseConnection();
+        }
+
+        /// <summary>
+        /// 三菱PLC测试
+        /// </summary>
+        [Theory]
+        [InlineData("127.0.0.1", 6000, PlcType.MelSec, ProtocolType.MC_Qna_3E_Binary)]
+        public void TestMelSecReadStringArray(
+            string ip, int port,
+            PlcType plcType, ProtocolType protocolType)
+        {
+            using var _operationManager = _serviceProvider.GetRequiredService<IOperationManager>();
+            var res = _operationManager.DefaultConnectionAndInit(new DefaultOperationDto()
+            {
+                IpAddress = ip,
+                Port = port,
+                PlcType = plcType,
+                ProtocolType = protocolType
+            });
+
+            Assert.True(res.IsSuccess);
+
+            //_operationManager.Write("D200", new string[] { "aabb1212","aabb1313"});
+
+            //var datas = _operationManager.Read<string[]>("D200", 100);
+
+            //每个字符串所占点位要有剩余，才能读出数组
+            //var datass = _operationManager.Read<string[]>("D100", 14);
+
+            var datasss = _operationManager.Read<short[]>("D100", 3);
+
+            _operationManager.CloseConnection();
+        }
     }
 }
