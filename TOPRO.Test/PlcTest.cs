@@ -461,9 +461,10 @@ namespace TOPRO.Test
             //var datas = _operationManager.Read<string[]>("D200", 100);
 
             //每个字符串所占点位要有剩余，才能读出数组
+            //或者字符串加固定符号结尾，比如,
             //var datass = _operationManager.Read<string[]>("D100", 14);
 
-            var datasss = _operationManager.Read<short[]>("D100", 3);
+            var datasss = _operationManager.Read<short>("L1310");
 
             _operationManager.CloseConnection();
         }

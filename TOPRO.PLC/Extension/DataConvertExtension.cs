@@ -10,7 +10,7 @@ namespace Topro.Extension.Plc.Extension
     public static class DataConvertExtension
     {
         /// <summary>
-        /// 将short类型转化成bit位数组   
+        /// 将short类型转化成bit位数组,从低位到高位
         /// 操作与PLc的报警位---标准操作
         /// </summary>
         /// <param name="integer"></param>
