@@ -355,9 +355,6 @@ namespace TOPRO.Test
             using var scope1 = _serviceProvider.CreateScope();
             using var scope2 = _serviceProvider.CreateScope();
             var operation1 = scope1.ServiceProvider.GetRequiredService<IOperationManager>();
-            var operation2 = scope2.ServiceProvider.GetRequiredService<IOperationManager>();
-
-            Assert.True(operation1 != operation2);
 
             //短连接，每次都会新建一个socket连接
             operation1.DefaultConnectionAndInit(new DefaultOperationDto
@@ -369,6 +366,11 @@ namespace TOPRO.Test
                 ProtocolType = protocolType,
 
             },longConnection:false);
+
+            var operation2 = scope2.ServiceProvider.GetRequiredService<IOperationManager>();
+
+            Assert.True(operation1 != operation2);
+
             operation2.DefaultConnectionAndInit(new DefaultOperationDto
             {
                 IpAddress = ip,

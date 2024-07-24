@@ -220,6 +220,7 @@ namespace TOPRO.HSL.Core.Net
             {
                 CoreSocket = rSocket.Content;
                 result.IsSuccess = true;
+                result.Message = StringResources.Language.SuccessText;
                 LogNet?.WriteDebug( ToString( ), StringResources.Language.NetEngineStart );
             }
 

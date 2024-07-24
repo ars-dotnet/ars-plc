@@ -46,7 +46,7 @@ namespace TOPRO.Test
             Assert.True(12.9f == floatdata.Content);
 
             //double
-            res = operationManager.Write($"{dbNamePrefix}{dbFrom + 50}", 99.89);
+            res = operationManager.Write($"{dbNamePrefix}{dbFrom + 50}", 99.89d);
             Assert.True(res.IsSuccess);
             var doubledata = operationManager.Read<double>($"{dbNamePrefix}{dbFrom + 50}");
             Assert.True(99.89 == doubledata.Content);
@@ -98,7 +98,7 @@ namespace TOPRO.Test
             Assert.True(234.56f == floatdata.Content[1]);
 
             //double
-            res = operationManager.Write($"{dbNamePrefix}{dbFrom + 50}", new double[] { 99.89, 897.567 });
+            res = operationManager.Write($"{dbNamePrefix}{dbFrom + 50}", new double[] { 99.89d, 897.567d });
             Assert.True(res.IsSuccess);
             var doubledata = operationManager.Read<double[]>($"{dbNamePrefix}{dbFrom + 50}", 2);
             Assert.True(99.89 == doubledata.Content[0]);
