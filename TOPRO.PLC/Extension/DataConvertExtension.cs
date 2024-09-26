@@ -25,6 +25,12 @@ namespace Topro.Extension.Plc.Extension
             return result;
         }
 
+        /// <summary>
+        /// bits右侧是高位，左侧是低位
+        /// </summary>
+        /// <param name="bits"></param>
+        /// <param name="resultSize"></param>
+        /// <returns></returns>
         public static short ToShort(this bool[] bits, int resultSize = 16) 
         {
             byte[] result = new byte[resultSize];

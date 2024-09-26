@@ -3,7 +3,6 @@ using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Topro.Extension.Plc.Dtos;
@@ -46,6 +45,32 @@ namespace TOPRO.Test
 
                 }
             };
+        }
+
+        [Theory]
+        [InlineData("192.168.1.110", 502, PlcType.Inovance, ProtocolType.Modbus_Tcp)]
+        public void Test1(string ip, int port,
+            PlcType plcType, ProtocolType protocolType) 
+        {
+            using var _operationManager = _serviceProvider.GetRequiredService<IOperationManager>();
+            var res = _operationManager.ModbusConnectionAndInit(new InovanceOperationDto()
+            {
+                IpAddress = ip,
+                Port = port,
+
+                Station = 1,
+                AddressStartWithZero = true,
+                Series = InovanceSeries.AM,
+                IsStringReverse = false,
+
+                PlcType = plcType,
+                ProtocolType = protocolType
+            });
+            Assert.True(res.IsSuccess);
+
+            var a = _operationManager.Read<string>("MW9100",12).Content;
+
+            _operationManager.CloseConnection();
         }
 
         /// <summary>
@@ -466,9 +491,39 @@ namespace TOPRO.Test
             //或者字符串加固定符号结尾，比如,
             //var datass = _operationManager.Read<string[]>("D100", 14);
 
-            var datasss = _operationManager.Read<short>("L1310");
+            var datasss = _operationManager.Read<string[]>("D100",30);
 
             _operationManager.CloseConnection();
+        }
+
+        [Fact]
+        public void TestBits() 
+        {
+            bool[] data = new bool[16] 
+            { 
+                true, true, true, true,
+                false,true, true,false,
+                false,false, false,false,
+                false,false, false,false
+            };
+
+            var a = data.ToShort();
+
+            var data1 = new bool[] 
+            { 
+                true, true, true, true,
+                false,true, true
+            };
+
+            var c = data1.ToShort();
+
+            Assert.True(a == c);
+            Assert.True(111 == a);
+
+            var m = c.ToBinaryBits();
+
+            Assert.True(data.SequenceEqual(m));
+            Assert.False(data1.SequenceEqual(m));
         }
     }
 }
