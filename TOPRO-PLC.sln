@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{D3FB9353
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TOPRO.Demo", "TOPRO.Demo\TOPRO.Demo.csproj", "{1EAB34B9-4AD6-46C3-8E49-2329877D2CFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topro.Framework.Test", "Topro.Framework.Test\Topro.Framework.Test.csproj", "{24B9FDC7-B06D-4981-A49D-E44076BBDAC4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TOPRO.Framework.Test", "Topro.Framework.Test\TOPRO.Framework.Test.csproj", "{24B9FDC7-B06D-4981-A49D-E44076BBDAC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
