@@ -491,7 +491,7 @@ namespace TOPRO.Test
             //或者字符串加固定符号结尾，比如,
             //var datass = _operationManager.Read<string[]>("D100", 14);
 
-            var datasss = _operationManager.Read<string[]>("D100",30);
+            var datasss = _operationManager.Read<ushort[]>("D100",10);
 
             _operationManager.CloseConnection();
         }
