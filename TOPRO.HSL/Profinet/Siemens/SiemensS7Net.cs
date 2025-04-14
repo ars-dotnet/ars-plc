@@ -626,7 +626,15 @@ namespace TOPRO.HSL.Profinet.Siemens
                         result.Content3 = Convert.ToUInt16( adds[0].Substring( 1 ) );
                     }
 
-                    result.Content2 = CalculateAddressStarted( address.Substring( address.IndexOf( '.' ) + 1 ) );
+                    string text = address.Substring(address.IndexOf('.') + 1);
+                    if (text.StartsWith("DBX") || text.StartsWith("DBB") || text.StartsWith("DBW") || text.StartsWith("DBD"))
+                    {
+                        text = text.Substring(3);
+                    }
+
+                    //result.Content2 = CalculateAddressStarted( address.Substring( address.IndexOf( '.' ) + 1 ) );
+
+                    result.Content2 = CalculateAddressStarted(text);
                 }
                 else if (address[0] == 'T')
                 {

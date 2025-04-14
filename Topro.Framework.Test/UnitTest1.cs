@@ -1,7 +1,9 @@
 using HslCommunication;
 using HslCommunication.Profinet.Siemens;
 using NUnit.Framework;
+using System.Net;
 using System.Text;
+using System.Web.Services.Description;
 
 namespace Topro.Framework.Test
 {
@@ -60,6 +62,34 @@ namespace Topro.Framework.Test
             Assert.True(data.Content.Replace("\0","") == "wabjtamwabjtam");
 
             siemensS7Net.ConnectClose();
+        }
+
+        [Test]
+        public void Test2() 
+        {
+            TOPRO.HSL.Inovance.InovanceTcpNet inovanceTcpNet = new TOPRO.HSL.Inovance.InovanceTcpNet()
+            {
+                IpAddress = "127.0.0.1",
+                Port = 502,
+
+                Station = 1,
+                AddressStartWithZero = true,
+                Series = TOPRO.HSL.Inovance.InovanceSeries.AM,
+                IsStringReverse = true,
+            };
+
+            var connect = inovanceTcpNet.ConnectServer();
+            Assert.True(connect.IsSuccess);
+
+            connect = inovanceTcpNet.Write("MW200", "wabjtamwabjtam", Encoding.ASCII);
+            Assert.True(connect.IsSuccess);
+
+            var data = inovanceTcpNet.ReadString("MW200", 32);
+
+            Assert.True(data.IsSuccess);
+            Assert.True(data.Content.Replace("\0", "") == "wabjtamwabjtam");
+
+            inovanceTcpNet.ConnectClose();
         }
     }
 }

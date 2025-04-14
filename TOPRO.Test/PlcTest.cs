@@ -50,7 +50,7 @@ namespace TOPRO.Test
         [Theory]
         [InlineData("192.168.1.110", 502, PlcType.Inovance, ProtocolType.Modbus_Tcp)]
         public void Test1(string ip, int port,
-            PlcType plcType, ProtocolType protocolType) 
+            PlcType plcType, ProtocolType protocolType)
         {
             using var _operationManager = _serviceProvider.GetRequiredService<IOperationManager>();
             var res = _operationManager.ModbusConnectionAndInit(new InovanceOperationDto()
@@ -68,7 +68,7 @@ namespace TOPRO.Test
             });
             Assert.True(res.IsSuccess);
 
-            var a = _operationManager.Read<string>("MW9100",12).Content;
+            var a = _operationManager.Read<string>("MW9100", 12).Content;
 
             _operationManager.CloseConnection();
         }
@@ -77,11 +77,11 @@ namespace TOPRO.Test
         /// 汇川PLC测试
         /// </summary>
         [Theory]
-        [InlineData("127.0.0.1", 502, PlcType.Inovance, ProtocolType.Modbus_Tcp,"MW",200)]
+        [InlineData("127.0.0.1", 502, PlcType.Inovance, ProtocolType.Modbus_Tcp, "MW", 200)]
         public void TestInovance(
-            string ip,int port,
+            string ip, int port,
             PlcType plcType, ProtocolType protocolType,
-            string dbNamePrefix, int dbFrom) 
+            string dbNamePrefix, int dbFrom)
         {
             using var _operationManager = _serviceProvider.GetRequiredService<IOperationManager>();
             var res = _operationManager.InovanceConnectionAndInit(new InovanceOperationDto()
@@ -125,9 +125,9 @@ namespace TOPRO.Test
         /// 三菱PLC测试
         /// </summary>
         [Theory]
-        [InlineData("127.0.0.1", 6000, PlcType.MelSec, ProtocolType.MC_Qna_3E_Binary,"D",400)]
+        [InlineData("127.0.0.1", 6000, PlcType.MelSec, ProtocolType.MC_Qna_3E_Binary, "D", 400)]
         public void TestMelSec(
-            string ip, int port, 
+            string ip, int port,
             PlcType plcType, ProtocolType protocolType,
             string dbNamePrefix, int dbFrom)
         {
@@ -169,9 +169,9 @@ namespace TOPRO.Test
         /// 西门子读写测试
         /// </summary>
         [Theory]
-        [InlineData("127.0.0.1", 102, PlcType.Siemens, ProtocolType.S7_S1200,"M",600)]
+        [InlineData("127.0.0.1", 102, PlcType.Siemens, ProtocolType.S7_S1200, "M", 600)]
         public void TestSiemens(
-            string ip, int port, 
+            string ip, int port,
             PlcType plcType, ProtocolType protocolType,
             string dbNamePrefix, int dbFrom)
         {
@@ -182,7 +182,7 @@ namespace TOPRO.Test
                 Port = port,
                 PlcType = plcType,
                 ProtocolType = protocolType
-            }, longConnection:false);
+            }, longConnection: false);
 
             Assert.True(res.IsSuccess);
 
@@ -214,9 +214,9 @@ namespace TOPRO.Test
         /// ModbusTcp读写测试
         /// </summary>
         [Theory]
-        [InlineData("127.0.0.1", 502, PlcType.Modbus, ProtocolType.Modbus_Tcp,"",800)]
+        [InlineData("127.0.0.1", 502, PlcType.Modbus, ProtocolType.Modbus_Tcp, "", 800)]
         public void TestModbus(
-            string ip, int port, 
+            string ip, int port,
             PlcType plcType, ProtocolType protocolType,
             string dbNamePrefix, int dbFrom)
         {
@@ -261,9 +261,9 @@ namespace TOPRO.Test
         /// 欧姆龙读写
         /// </summary>
         [Theory]
-        [InlineData("127.0.0.1", 9600, PlcType.OmRon, ProtocolType.FinsTcp,"D",1000)]
+        [InlineData("127.0.0.1", 9600, PlcType.OmRon, ProtocolType.FinsTcp, "D", 1000)]
         public void TestOmRon(
-            string ip, int port, 
+            string ip, int port,
             PlcType plcType, ProtocolType protocolType,
             string dbNamePrefix, int dbFrom)
         {
@@ -325,7 +325,7 @@ namespace TOPRO.Test
             Assert.True(res.IsSuccess);
 
             data = res.Content.ToBinaryBits();
-            
+
             Assert.True(true == data[0]);
             Assert.True(false == data[1]);
             Assert.True(true == data[2]);
@@ -355,7 +355,7 @@ namespace TOPRO.Test
             System.Text.Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             rel = _operationManager.Write(
                 "D120",
-                new string[] { "你好", "test" }, 
+                new string[] { "你好", "test" },
                 typeof(string[]),
                 Encoding.GetEncoding("GBK"));
 
@@ -390,7 +390,7 @@ namespace TOPRO.Test
                 PlcType = plcType,
                 ProtocolType = protocolType,
 
-            },longConnection:false);
+            }, longConnection: false);
 
             var operation2 = scope2.ServiceProvider.GetRequiredService<IOperationManager>();
 
@@ -489,11 +489,48 @@ namespace TOPRO.Test
 
             //每个字符串所占点位要有剩余，才能读出数组
             //或者字符串加固定符号结尾，比如,
-            //var datass = _operationManager.Read<string[]>("D100", 14);
+            var datass = _operationManager.Read<string[]>("D100", 30);
 
-            var datasss = _operationManager.Read<ushort[]>("D100",10);
+            //var datasss = _operationManager.Read<int[]>("D100",10).Content;
+
+            //var res1 = _operationManager.Write<int>("D100", 65588);
+            //Assert.True(res1.IsSuccess);
+
+            //var data = _operationManager.Read<int>("D100").Content;
+            //Assert.True(data == 65588);
+
+            //res1 = _operationManager.Write<int>("D100", 0);
+            //Assert.True(res1.IsSuccess);
+
+            //data = _operationManager.Read<int>("D100").Content;
+            //Assert.True(data == 0);
 
             _operationManager.CloseConnection();
+        }
+
+        [Theory]
+        [InlineData("127.0.0.1", 102, PlcType.Siemens, ProtocolType.S7_S300)]
+        public void TestSiemensx(string ip, int port,
+            PlcType plcType, ProtocolType protocolType) 
+        {
+            using var _operationManager = _serviceProvider.GetRequiredService<IOperationManager>();
+            var res = _operationManager.DefaultConnectionAndInit(new DefaultOperationDto()
+            {
+                IpAddress = ip,
+                Port = port,
+                PlcType = plcType,
+                ProtocolType = protocolType
+            }, longConnection: false);
+
+            Assert.True(res.IsSuccess);
+
+            res =_operationManager.Write<short>("DB150.DBB286", 3355);
+
+            Assert.True(res.IsSuccess);
+
+            var data = _operationManager.Read<short>("DB150.DBB286", 1);
+
+            Assert.True(data.Content == 3355);
         }
 
         [Fact]
