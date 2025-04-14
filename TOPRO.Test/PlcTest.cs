@@ -483,13 +483,13 @@ namespace TOPRO.Test
 
             Assert.True(res.IsSuccess);
 
-            //_operationManager.Write("D200", new string[] { "aabb1212","aabb1313"});
+            _operationManager.Write("D200", new string[] { "aabb1212","aabb1313"});
 
             //var datas = _operationManager.Read<string[]>("D200", 100);
 
             //每个字符串所占点位要有剩余，才能读出数组
             //或者字符串加固定符号结尾，比如,
-            var datass = _operationManager.Read<string[]>("D100", 30);
+            var datass = _operationManager.Read<string[]>("D200", 30);
 
             //var datasss = _operationManager.Read<int[]>("D100",10).Content;
 
