@@ -489,6 +489,7 @@ namespace TOPRO.Test
 
             //每个字符串所占点位要有剩余，才能读出数组
             //或者字符串加固定符号结尾，比如,
+            //var datass = _operationManager.Read<IEnumerable<string>>("D200", 30); //数组没有实现
             var datass = _operationManager.Read<string[]>("D200", 30);
 
             //var datasss = _operationManager.Read<int[]>("D100",10).Content;
@@ -524,13 +525,39 @@ namespace TOPRO.Test
 
             Assert.True(res.IsSuccess);
 
-            res =_operationManager.Write<short>("DB150.DBB286", 3355);
+            res =_operationManager.Write<short>("DB150.DBB286", 123);
 
             Assert.True(res.IsSuccess);
 
             var data = _operationManager.Read<short>("DB150.DBB286", 1);
 
-            Assert.True(data.Content == 3355);
+            Assert.True(data.Content == 123);
+
+            //写bit位
+            //   （DB1.DBX0.8 - DB1.DBX0.15）是右边的8位，从右向左算；
+            //   （DB1.DBX0.0 - DB1.DBX0.7）是左边的8位，从右向左算；
+
+            // 00000000 01111011 => 00000000 01111010 
+            res = _operationManager.Write("DB150.DBB286.8", false);
+            Assert.True(res.IsSuccess);
+            data = _operationManager.Read<short>("DB150.DBB286", 1);
+            var c = data.Content.ToBinaryBits();
+
+            // 00000000 01111010 => 00000000 01111110
+            res = _operationManager.Write("DB150.DBB286.10", true);
+            Assert.True(res.IsSuccess);
+            data = _operationManager.Read<short>("DB150.DBB286", 1);
+            c = data.Content.ToBinaryBits();
+
+            //00000000 01111110 => 00000001 01111110 
+            res = _operationManager.Write("DB150.DBB286.0", true);
+            data = _operationManager.Read<short>("DB150.DBB286", 1);
+            c = data.Content.ToBinaryBits();
+
+            //00000001 01111110 => 00001001 01111110
+            res = _operationManager.Write("DB150.DBB286.3", true);
+            data = _operationManager.Read<short>("DB150.DBB286", 1);
+            c = data.Content.ToBinaryBits();
         }
 
         [Fact]
@@ -545,6 +572,8 @@ namespace TOPRO.Test
             };
 
             var a = data.ToShort();
+
+            var mmm = a.ToBinaryBits();
 
             var data1 = new bool[] 
             { 

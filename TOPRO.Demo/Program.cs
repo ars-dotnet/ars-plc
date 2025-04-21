@@ -32,13 +32,13 @@ var res = operationManager.DefaultConnectionAndInit(new DefaultOperationDto
 
 Console.WriteLine("连接PLC:" + res.Message);
 
-////res = operationManager.Write<short>("D100", 123);
+res = operationManager.Write<short>("D100", 123);
 
-////Console.WriteLine("写PLC点位:" + res.Message);
+Console.WriteLine("写PLC点位:" + res.Message);
 
-////var read = operationManager.Read<short>("D100");
+var read = operationManager.Read<short>("D100");
 
-////Console.WriteLine("读取PLC点位:" + read.Message + ",值:" + read.Content);
+Console.WriteLine("读取PLC点位:" + read.Message + ",值:" + read.Content);
 
 var datass = operationManager.Read<string[]>("D100", 30);
 
