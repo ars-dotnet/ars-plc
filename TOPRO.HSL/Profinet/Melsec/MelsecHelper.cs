@@ -54,6 +54,9 @@ namespace TOPRO.HSL.Profinet.Melsec
                     case 'd':
                         {
                             result.Content1 = MelsecMcDataType.D;
+
+                            var a = Convert.ToInt32(address.Substring(1), MelsecMcDataType.D.FromBase);
+
                             result.Content2 = Convert.ToUInt16( address.Substring( 1 ), MelsecMcDataType.D.FromBase );
                             break;
                         }

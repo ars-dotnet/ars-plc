@@ -509,9 +509,16 @@ namespace TOPRO.Test
             _operationManager.CloseConnection();
         }
 
+        /// <summary>
+        /// 测试西门子读写bit
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <param name="port"></param>
+        /// <param name="plcType"></param>
+        /// <param name="protocolType"></param>
         [Theory]
         [InlineData("127.0.0.1", 102, PlcType.Siemens, ProtocolType.S7_S300)]
-        public void TestSiemensx(string ip, int port,
+        public void TestSiemensBit(string ip, int port,
             PlcType plcType, ProtocolType protocolType) 
         {
             using var _operationManager = _serviceProvider.GetRequiredService<IOperationManager>();
@@ -560,6 +567,38 @@ namespace TOPRO.Test
             c = data.Content.ToBinaryBits();
         }
 
+        /// <summary>
+        /// 测试西门子读写string
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <param name="port"></param>
+        /// <param name="plcType"></param>
+        /// <param name="protocolType"></param>
+        [Theory]
+        [InlineData("127.0.0.1", 102, PlcType.Siemens, ProtocolType.S7_S300)]
+        public void TestSiemensxString(string ip, int port,
+            PlcType plcType, ProtocolType protocolType)
+        {
+            using var _operationManager = _serviceProvider.GetRequiredService<IOperationManager>();
+            var res = _operationManager.DefaultConnectionAndInit(new DefaultOperationDto()
+            {
+                IpAddress = ip,
+                Port = port,
+                PlcType = plcType,
+                ProtocolType = protocolType
+            }, longConnection: false);
+
+            Assert.True(res.IsSuccess);
+
+            res = _operationManager.Write<string>("DB100.DBB100", "aabb1212");
+
+            Assert.True(res.IsSuccess);
+
+            var data = _operationManager.Read<string>("DB100.DBB100", 10);
+
+            Assert.True(data.Content == "aabb1212");
+        }
+
         [Fact]
         public void TestBits() 
         {
@@ -590,6 +629,48 @@ namespace TOPRO.Test
 
             Assert.True(data.SequenceEqual(m));
             Assert.False(data1.SequenceEqual(m));
+        }
+
+        /// <summary>
+        /// 三菱PLC测试读写Bit位
+        /// </summary>
+        [Theory]
+        [InlineData("127.0.0.1", 6000, PlcType.MelSec, ProtocolType.MC_Qna_3E_Binary)]
+        public void TestMelSecReadBit(
+            string ip, int port,
+            PlcType plcType, ProtocolType protocolType)
+        {
+            using var _operationManager = _serviceProvider.GetRequiredService<IOperationManager>();
+            var res = _operationManager.DefaultConnectionAndInit(new DefaultOperationDto()
+            {
+                IpAddress = ip,
+                Port = port,
+                PlcType = plcType,
+                ProtocolType = protocolType
+            });
+
+            Assert.True(res.IsSuccess);
+
+            //写bit位
+            res = _operationManager.Write("D200.1",true);
+            res = _operationManager.Write("D200.1", false);
+            Assert.True(res.IsSuccess);
+
+            res = _operationManager.Write("D200.1", new bool[] { true,false,true});
+            Assert.True(res.IsSuccess);
+
+            //读bit位
+            var data = _operationManager.Read<bool>("D200.1");
+            Assert.True(data.IsSuccess);
+            Assert.True(data.Content == true);
+
+            var datas = _operationManager.Read<bool[]>("D200.1",6);
+
+            Assert.True(datas.IsSuccess);
+            Assert.True(datas.Content[0] == true);
+            Assert.True(datas.Content[2] == true);
+
+            _operationManager.CloseConnection();
         }
     }
 }

@@ -6,6 +6,7 @@ using TOPRO.HSL.BasicFramework;
 using TOPRO.HSL.Core;
 using TOPRO.HSL.Core.IMessage;
 using TOPRO.HSL.Core.Net;
+using TOPRO.HSL.Extensions;
 
 namespace TOPRO.HSL.Profinet.Melsec
 {
@@ -209,6 +210,11 @@ namespace TOPRO.HSL.Profinet.Melsec
         /// </example>
         public override OperateResult<bool[]> ReadBool( string address, ushort length )
         {
+            if (address.IndexOf('.') > 0)
+            {
+                return ReadBool(this,address, length);
+            }
+
             // 解析地址
             OperateResult<MelsecMcDataType, ushort> analysis = MelsecHelper.McAnalysisAddress( address );
             if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( analysis );
@@ -307,6 +313,11 @@ namespace TOPRO.HSL.Profinet.Melsec
         /// <returns>返回写入结果</returns>
         public override OperateResult Write( string address, bool[] values )
         {
+            if (address.IndexOf(".") > 0) 
+            {
+                return WriteBoolWithWord(this, address, values);
+            }
+
             return Write( address, values.Select( m => m ? (byte)0x01 : (byte)0x00 ).ToArray( ) );
         }
 
@@ -471,7 +482,82 @@ namespace TOPRO.HSL.Profinet.Melsec
                 return OperateResult.CreateSuccessResult( Content );
             }
         }
-        
+
+        public static OperateResult<bool[]> ReadBool(IReadWriteNet device, string address, ushort length, int addressLength = 16, bool reverseByWord = false)
+        {
+            if (address.IndexOf('.') > 0)
+            {
+                string[] array = address.SplitDot();
+                int num = 0;
+                try
+                {
+                    num = array[1].CalculateBitStartIndex();
+                }
+                catch (Exception ex)
+                {
+                    return new OperateResult<bool[]>("Bit Index format wrong, " + ex.Message);
+                }
+                ushort length2 = (ushort)((length + num + addressLength - 1) / addressLength);
+                OperateResult<byte[]> operateResult = device.Read(array[0], length2);
+                if (!operateResult.IsSuccess)
+                {
+                    return OperateResult.CreateFailedResult<bool[]>(operateResult);
+                }
+                if (reverseByWord)
+                {
+                    return OperateResult.CreateSuccessResult(operateResult.Content.ReverseByWord().ToBoolArray().SelectMiddle(num, length));
+                }
+                return OperateResult.CreateSuccessResult(operateResult.Content.ToBoolArray().SelectMiddle(num, length));
+            }
+            return device.ReadBool(address, length);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="readWrite"></param>
+        /// <param name="address"></param>
+        /// <param name="values"></param>
+        /// <param name="addLength"></param>
+        /// <param name="reverseWord"></param>
+        /// <param name="bitStr"></param>
+        /// <returns></returns>
+        public static OperateResult WriteBoolWithWord(IReadWriteNet readWrite, string address, bool[] values, int addLength = 16, bool reverseWord = false, string bitStr = null)
+        {
+            string[] array = address.SplitDot();
+            int num = 0;
+            try
+            {
+                if (string.IsNullOrEmpty(bitStr))
+                {
+                    if (array.Length > 1)
+                    {
+                        num = Convert.ToInt32(array[1]);
+                    }
+                }
+                else
+                {
+                    num = Convert.ToInt32(bitStr);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new OperateResult(address + " Bit index input wrong: " + ex.Message);
+            }
+            ushort length = (ushort)((num + values.Length + addLength - 1) / addLength);
+            OperateResult<byte[]> operateResult = readWrite.Read(array[0], length);
+            if (!operateResult.IsSuccess)
+            {
+                return OperateResult.CreateFailedResult<bool[]>(operateResult);
+            }
+            bool[] array2 = (reverseWord ? operateResult.Content.ReverseByWord().ToBoolArray() : operateResult.Content.ToBoolArray());
+            if (num + values.Length <= array2.Length)
+            {
+                values.CopyTo(array2, num);
+            }
+            return readWrite.Write(array[0], reverseWord ? array2.ToByteArray().ReverseByWord() : array2.ToByteArray());
+        }
+
         #endregion
     }
 }

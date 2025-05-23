@@ -719,6 +719,12 @@ namespace TOPRO.HSL.BasicFramework
             return buffer;
         }
 
+        public static bool[] ByteToBoolArray(byte[] InBytes)
+        {
+            return (InBytes == null) ? null : ByteToBoolArray(InBytes, InBytes.Length * 8);
+        }
+
+
         /// <summary>
         /// 从Byte数组中提取位数组，length代表位数 ->
         /// Extracts a bit array from a byte array, length represents the number of digits
@@ -764,6 +770,20 @@ namespace TOPRO.HSL.BasicFramework
             return buffer;
         }
 
+        public static T[] ArraySelectMiddle<T>(T[] value, int index, int length)
+        {
+            if (value == null)
+            {
+                return null;
+            }
+            if (length == 0)
+            {
+                return new T[0];
+            }
+            T[] array = new T[Math.Min(value.Length, length)];
+            Array.Copy(value, index, array, 0, array.Length);
+            return array;
+        }
 
         #endregion
 

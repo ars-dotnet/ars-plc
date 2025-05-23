@@ -28,10 +28,10 @@ namespace Topro.Framework.Test
             OperateResult connect = siemensS7Net.ConnectServer();
             Assert.True(connect.IsSuccess);
 
-            connect = siemensS7Net.Write("M100","aabb1212");
+            connect = siemensS7Net.Write("DB150.100", "aabb1212");
             Assert.True(connect.IsSuccess);
 
-            var data = siemensS7Net.ReadString("M100");
+            var data = siemensS7Net.ReadString("DB150.100");
 
             Assert.True(data.IsSuccess);
             Assert.True(data.Content == "aabb1212");
