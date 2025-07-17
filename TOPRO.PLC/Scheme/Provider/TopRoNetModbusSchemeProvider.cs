@@ -17,7 +17,7 @@ namespace Topro.Extension.Plc.Scheme
         public override ITopRoNetScheme? GetScheme(ITopRoNetScheme netScheme)
         {
             ITopRoModBusScheme topRo = (ITopRoModBusScheme)netScheme;
-            return _instance.Instance.
+            return _instance.Instance.ToList().
                 Where(r => r.PlcProtocolLevel == PlcProtocolLevel).
                 Select(r => (ITopRoModBusScheme)r).
                 Where(r =>

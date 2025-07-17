@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Topro.Extension.Plc.Dtos;
 using Topro.Extension.Plc.Extension;
+using TOPRO.HSL;
 using TOPRO.HSL.Inovance;
 using TOPRO.PLC;
 using TOPRO.PLC.Dtos;
@@ -483,14 +484,15 @@ namespace TOPRO.Test
 
             Assert.True(res.IsSuccess);
 
-            _operationManager.Write("D200", new string[] { "aabb1212","aabb1313"});
-
-            //var datas = _operationManager.Read<string[]>("D200", 100);
+            _operationManager.Write("D200", new string[] { "aabb00121200","aabb00131300"});
+            _operationManager.Write("D300", "aabb00121200");
 
             //每个字符串所占点位要有剩余，才能读出数组
             //或者字符串加固定符号结尾，比如,
             //var datass = _operationManager.Read<IEnumerable<string>>("D200", 30); //数组没有实现
             var datass = _operationManager.Read<string[]>("D200", 30);
+
+            var datas = _operationManager.Read<string>("D300",10);
 
             //var datasss = _operationManager.Read<int[]>("D100",10).Content;
 
@@ -505,6 +507,10 @@ namespace TOPRO.Test
 
             //data = _operationManager.Read<int>("D100").Content;
             //Assert.True(data == 0);
+
+            _operationManager.CloseConnection();
+
+            _operationManager.CloseConnection();
 
             _operationManager.CloseConnection();
         }
@@ -671,6 +677,64 @@ namespace TOPRO.Test
             Assert.True(datas.Content[2] == true);
 
             _operationManager.CloseConnection();
+        }
+
+        /// <summary>
+        /// 测试并发连接、关闭
+        /// </summary>
+        [Fact]
+        public async void TestManyConnect() 
+        {
+            using var _operationManager = _serviceProvider.GetRequiredService<IOperationManager>();
+
+            //连接
+            IEnumerable<Task<(IOperationManager, OperateResult)>> tasks = new List<Task<(IOperationManager, OperateResult)>>()
+            {
+                ConnectAsync("127.0.0.1",6000),
+                ConnectAsync("127.0.0.1",6001),
+                ConnectAsync("127.0.0.1",6002),
+                ConnectAsync("127.0.0.1",6003),
+                ConnectAsync("127.0.0.1",6004),
+                ConnectAsync("127.0.0.1",6005),
+                ConnectAsync("127.0.0.1",6006),
+                ConnectAsync("127.0.0.1",6007),
+                ConnectAsync("127.0.0.1",6008),
+            };
+
+            var mm = await Task.WhenAll(tasks);
+
+            var instance = _serviceProvider.GetRequiredService<ITopRoSchemeInstance>();
+
+            //关闭
+            var taskss = mm.Select(r => CloseAsync(r.Item1));
+
+            var nn = await Task.WhenAll(taskss);
+        }
+
+        private async Task<(IOperationManager, OperateResult)> ConnectAsync(string ip,int port) 
+        {
+            await Task.Delay(new Random().Next(10, 200));
+
+            var provider = _serviceProvider.CreateScope().ServiceProvider;
+
+            var operationManager = provider.GetRequiredService<IOperationManager>();
+
+            var res = operationManager.DefaultConnectionAndInit(new DefaultOperationDto()
+            {
+                IpAddress = ip,
+                Port = port,
+                PlcType = PlcType.MelSec,
+                ProtocolType = ProtocolType.MC_Qna_3E_Binary
+            });
+
+            return (operationManager,res);
+        }
+
+        private async Task<OperateResult> CloseAsync(IOperationManager operationManager) 
+        {
+            await Task.Delay(new Random().Next(10, 200));
+
+            return operationManager.CloseConnection();
         }
     }
 }

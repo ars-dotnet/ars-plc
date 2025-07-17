@@ -19,7 +19,7 @@ namespace Topro.Extension.Plc.Scheme
         public override ITopRoNetScheme? GetScheme(ITopRoNetScheme netScheme)
         {
             ITopRoSerialScheme topRo = (ITopRoSerialScheme)netScheme;
-            return _instance.Instance.
+            return _instance.Instance.ToList().
                 Where(r => r.PlcProtocolLevel == PlcProtocolLevel).
                 Select(r => (ITopRoSerialScheme)r).
                 Where(r =>
