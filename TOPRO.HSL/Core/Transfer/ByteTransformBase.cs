@@ -16,7 +16,7 @@ namespace TOPRO.HSL.Core
         /// <summary>
         /// 实例化一个默认的对象
         /// </summary>
-        public ByteTransformBase( )
+        public ByteTransformBase()
         {
             DataFormat = DataFormat.DCBA;
         }
@@ -31,7 +31,7 @@ namespace TOPRO.HSL.Core
         /// <param name="buffer">缓存数据</param>
         /// <param name="index">位的索引</param>
         /// <returns>bool对象</returns>
-        public virtual bool TransBool( byte[] buffer, int index )
+        public virtual bool TransBool(byte[] buffer, int index)
         {
             return ((buffer[index] & 0x01) == 0x01);
         }
@@ -44,11 +44,11 @@ namespace TOPRO.HSL.Core
         /// <param name="index">位的索引</param>
         /// <param name="length">bool长度</param>
         /// <returns>bool数组</returns>
-        public bool[] TransBool( byte[] buffer, int index, int length )
+        public bool[] TransBool(byte[] buffer, int index, int length)
         {
             byte[] tmp = new byte[length];
-            Array.Copy( buffer, index, tmp, 0, length );
-            return SoftBasic.ByteToBoolArray( tmp, length * 8 );
+            Array.Copy(buffer, index, tmp, 0, length);
+            return SoftBasic.ByteToBoolArray(tmp, length * 8);
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace TOPRO.HSL.Core
         /// <param name="buffer">缓存数据</param>
         /// <param name="index">索引位置</param>
         /// <returns>byte对象</returns>
-        public virtual byte TransByte( byte[] buffer, int index )
+        public virtual byte TransByte(byte[] buffer, int index)
         {
             return buffer[index];
         }
@@ -69,13 +69,65 @@ namespace TOPRO.HSL.Core
         /// <param name="index">索引位置</param>
         /// <param name="length">读取的数组长度</param>
         /// <returns>byte数组对象</returns>
-        public virtual byte[] TransByte( byte[] buffer, int index, int length )
+        public virtual byte[] TransByte(byte[] buffer, int index, int length)
         {
             byte[] tmp = new byte[length];
-            Array.Copy( buffer, index, tmp, 0, length );
+            Array.Copy(buffer, index, tmp, 0, length);
             return tmp;
         }
 
+        /// <summary>
+        /// 1.对等转换，字节不需要颠倒，比如三菱PLC，Hsl通信协议
+        /// 2.颠倒转换，字节需要完全颠倒，比如西门子PLC
+        /// 3.以2字节为单位颠倒转换，比如Modbus协议
+        /// </summary>
+        /// <param name="buffer">缓存数据</param>
+        /// <param name="index">索引位置</param>
+        /// <param name="length">读取的数组长度</param>
+        /// <returns></returns>
+        public virtual byte[] TransByteByType(byte[] buffer, int index, int length) 
+        {
+            return TransByte(buffer,index,length);
+        }
+
+        /// <summary>
+        /// 按照字节错位的方法
+        /// </summary>
+        /// <param name="buffer">实际的字节数据</param>
+        /// <param name="index">起始字节位置</param>
+        /// <param name="length">数据长度</param>
+        /// <returns>处理过的数据信息</returns>
+        public byte[] ReverseBytesByWord(byte[] buffer, int index, int length)
+        {
+            if (buffer == null) return null;
+
+            // copy data
+            byte[] tmp = new byte[length];
+            for (int i = 0; i < length; i++)
+            {
+                tmp[i] = buffer[index + i];
+            }
+
+            // change
+            for (int i = 0; i < length / 2; i++)
+            {
+                byte b = tmp[i * 2 + 0];
+                tmp[i * 2 + 0] = tmp[i * 2 + 1];
+                tmp[i * 2 + 1] = b;
+            }
+
+            return tmp;
+        }
+
+        /// <summary>
+        /// 按照字节错位的方法
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <returns></returns>
+        public byte[] ReverseBytesByWord(byte[] buffer)
+        {
+            return ReverseBytesByWord(buffer, 0, buffer.Length);
+        }
 
         /// <summary>
         /// 从缓存中提取short结果

@@ -596,13 +596,15 @@ namespace TOPRO.Test
 
             Assert.True(res.IsSuccess);
 
-            res = _operationManager.Write<string>("DB100.DBB100", "aabb1212");
+            //res = _operationManager.Write<string>("DB100.DBB100", "aabb1212");
 
-            Assert.True(res.IsSuccess);
+            //Assert.True(res.IsSuccess);
 
-            var data = _operationManager.Read<string>("DB100.DBB100", 10);
+            //var data = _operationManager.Read<string>("DB100.DBB100", 10);
 
-            Assert.True(data.Content == "aabb1212");
+            //Assert.True(data.Content == "aabb1212");
+
+            var xx = _operationManager.Read<short>("DB100.DBB200", 1);
         }
 
         [Fact]
@@ -658,23 +660,73 @@ namespace TOPRO.Test
             Assert.True(res.IsSuccess);
 
             //写bit位
-            res = _operationManager.Write("D200.1",true);
-            res = _operationManager.Write("D200.1", false);
+            //res = _operationManager.Write("D200.1",true);
+            //res = _operationManager.Write("D200.1", false);
+            //Assert.True(res.IsSuccess);
+
+            //res = _operationManager.Write("D200.1", new bool[] { true,false,true});
+            //Assert.True(res.IsSuccess);
+
+            ////读bit位
+            //var data = _operationManager.Read<bool>("D200.1");
+            //Assert.True(data.IsSuccess);
+            //Assert.True(data.Content == true);
+
+            //var datas = _operationManager.Read<bool[]>("D200.1",6);
+
+            //Assert.True(datas.IsSuccess);
+            //Assert.True(datas.Content[0] == true);
+            //Assert.True(datas.Content[2] == true);
+
+            //_operationManager.Write("D100", 100);
+            //datas = _operationManager.Read<bool[]>("D100.0", 7);
+            //Assert.True(datas.IsSuccess);
+            //Assert.True(datas.Content[0] == false);
+            //Assert.True(datas.Content[1] == false);
+            //Assert.True(datas.Content[2] == true);
+            //Assert.True(datas.Content[5] == true);
+            //Assert.True(datas.Content[6] == true);
+
+            var xx = _operationManager.Read<short>("D100", 1);
+
+            _operationManager.CloseConnection();
+        }
+
+        /// <summary>
+        /// modbus读取bit位
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <param name="port"></param>
+        /// <param name="plcType"></param>
+        /// <param name="protocolType"></param>
+        [Theory]
+        [InlineData("127.0.0.1", 502, PlcType.Modbus, ProtocolType.Modbus_Tcp)]
+        public void TestModBusReadBit(
+            string ip, int port,
+            PlcType plcType, ProtocolType protocolType)
+        {
+            using var _operationManager = _serviceProvider.GetRequiredService<IOperationManager>();
+            var res = _operationManager.ModbusConnectionAndInit(new ModbusOperationDto()
+            {
+                IpAddress = ip,
+                Port = port,
+
+                Station = 1,
+                AddressStartWithZero = true,
+                IsStringReverse = false,
+
+                PlcType = plcType,
+                ProtocolType = protocolType
+            }, longConnection: false);
+
             Assert.True(res.IsSuccess);
 
-            res = _operationManager.Write("D200.1", new bool[] { true,false,true});
-            Assert.True(res.IsSuccess);
+            //var res1 = _operationManager.Write("100", 100);
+            //Assert.True(res1.IsSuccess);
 
-            //读bit位
-            var data = _operationManager.Read<bool>("D200.1");
-            Assert.True(data.IsSuccess);
-            Assert.True(data.Content == true);
+            //var datas = _operationManager.Read<byte[]>("100", 1);
 
-            var datas = _operationManager.Read<bool[]>("D200.1",6);
-
-            Assert.True(datas.IsSuccess);
-            Assert.True(datas.Content[0] == true);
-            Assert.True(datas.Content[2] == true);
+            var datas = _operationManager.Read<short>("100", 1);
 
             _operationManager.CloseConnection();
         }

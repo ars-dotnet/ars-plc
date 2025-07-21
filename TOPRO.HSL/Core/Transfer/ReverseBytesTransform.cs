@@ -17,8 +17,20 @@ namespace TOPRO.HSL.Core
     /// </summary>
     public class ReverseBytesTransform : ByteTransformBase
     {
+        /// <summary>
+        /// 从缓存中提取byte数组结果
+        /// </summary>
+        /// <param name="buffer">缓存数据</param>
+        /// <param name="index">索引位置</param>
+        /// <param name="length">读取的数组长度</param>
+        /// <returns></returns>
+        public override byte[] TransByteByType(byte[] buffer, int index, int length)
+        {
+            return ReverseBytesByWord(buffer, index, length);
+        }
+
         #region Get Value From Bytes
-        
+
         /// <summary>
         /// 从缓存中提取short结果
         /// </summary>

@@ -63,6 +63,32 @@ namespace TOPRO.HSL.Core
         /// <returns></returns>
         byte[] TransByte( byte[] buffer, int index, int length );
 
+        /// <summary>
+        /// 1.对等转换，字节不需要颠倒，比如三菱PLC，Hsl通信协议
+        /// 2.颠倒转换，字节需要完全颠倒，比如西门子PLC
+        /// 3.以2字节为单位颠倒转换，比如Modbus协议
+        /// </summary>
+        /// <param name="buffer">缓存数据</param>
+        /// <param name="index">索引位置</param>
+        /// <param name="length">读取的数组长度</param>
+        /// <returns></returns>
+        byte[] TransByteByType(byte[] buffer, int index, int length);
+
+        /// <summary>
+        /// 按照字节错位的方法
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <returns></returns>
+        byte[] ReverseBytesByWord(byte[] buffer);
+
+        /// <summary>
+        /// 按照字节错位的方法
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <param name="index"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        byte[] ReverseBytesByWord(byte[] buffer, int index, int length);
 
         /// <summary>
         /// 从缓存中提取short结果

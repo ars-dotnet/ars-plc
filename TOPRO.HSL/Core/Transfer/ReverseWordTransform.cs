@@ -22,46 +22,6 @@ namespace TOPRO.HSL.Core
 
         #endregion
 
-        #region Private Method
-
-        /// <summary>
-        /// 按照字节错位的方法
-        /// </summary>
-        /// <param name="buffer">实际的字节数据</param>
-        /// <param name="index">起始字节位置</param>
-        /// <param name="length">数据长度</param>
-        /// <returns>处理过的数据信息</returns>
-        private byte[] ReverseBytesByWord( byte[] buffer, int index, int length )
-        {
-            if (buffer == null) return null;
-
-            // copy data
-            byte[] tmp = new byte[length];
-            for (int i = 0; i < length; i++)
-            {
-                tmp[i] = buffer[index + i];
-            }
-
-            // change
-            for (int i = 0; i < length / 2; i++)
-            {
-                byte b = tmp[i * 2 + 0];
-                tmp[i * 2 + 0] = tmp[i * 2 + 1];
-                tmp[i * 2 + 1] = b;
-            }
-
-            return tmp;
-        }
-
-        private byte[] ReverseBytesByWord( byte[] buffer )
-        {
-            return ReverseBytesByWord( buffer, 0, buffer.Length );
-        }
-        
-
-
-        #endregion
-
         #region Public Properties
         
         /// <summary>
@@ -74,6 +34,17 @@ namespace TOPRO.HSL.Core
 
         #region Get Value From Bytes
 
+        /// <summary>
+        /// 从缓存中提取byte数组结果
+        /// </summary>
+        /// <param name="buffer">缓存数据</param>
+        /// <param name="index">索引位置</param>
+        /// <param name="length">读取的数组长度</param>
+        /// <returns></returns>
+        public override byte[] TransByteByType(byte[] buffer, int index, int length)
+        {
+            return ReverseBytesByWord(buffer, index, length);
+        }
 
         /// <summary>
         /// 从缓存中提取short结果
