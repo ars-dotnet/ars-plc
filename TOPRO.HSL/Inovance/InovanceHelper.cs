@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TOPRO.HSL.Core;
+using TOPRO.HSL.ModBus;
 
 namespace TOPRO.HSL.Inovance
 {
@@ -204,39 +205,16 @@ namespace TOPRO.HSL.Inovance
                 {
                     text = $"s={operateResult.Content};";
                 }
-
-                if (modbusCode == 1 || modbusCode == 15 || modbusCode == 5 || modbusCode == 3 || modbusCode == 16)
+                if (modbusCode == 1 || modbusCode == 15 || modbusCode == 5)
                 {
-                    if (address.StartsWith("X") || address.StartsWith("x"))
+                    if (ModbusHelper.TransAddressToModbus(text, address, new string[2] { "X", "Y" }, new int[2] { 63488, 64512 }, CalculateH3UStartAddress, out var newAddress))
                     {
-                        return OperateResult.CreateSuccessResult(text + (CalculateH3UStartAddress(address.Substring(1)) + 63488));
+                        return OperateResult.CreateSuccessResult(newAddress);
                     }
-
-                    if (address.StartsWith("Y") || address.StartsWith("y"))
+                    if (ModbusHelper.TransAddressToModbus(text, address, new string[4] { "SM", "S", "T", "C" }, new int[4] { 9216, 57344, 61440, 62464 }, out var newAddress2))
                     {
-                        return OperateResult.CreateSuccessResult(text + (CalculateH3UStartAddress(address.Substring(1)) + 64512));
+                        return OperateResult.CreateSuccessResult(newAddress2);
                     }
-
-                    if (address.StartsWith("SM") || address.StartsWith("sm"))
-                    {
-                        return OperateResult.CreateSuccessResult(text + (Convert.ToInt32(address.Substring(2)) + 9216));
-                    }
-
-                    if (address.StartsWith("S") || address.StartsWith("s"))
-                    {
-                        return OperateResult.CreateSuccessResult(text + (Convert.ToInt32(address.Substring(1)) + 57344));
-                    }
-
-                    if (address.StartsWith("T") || address.StartsWith("t"))
-                    {
-                        return OperateResult.CreateSuccessResult(text + (Convert.ToInt32(address.Substring(1)) + 61440));
-                    }
-
-                    if (address.StartsWith("C") || address.StartsWith("c"))
-                    {
-                        return OperateResult.CreateSuccessResult(text + (Convert.ToInt32(address.Substring(1)) + 62464));
-                    }
-
                     if (address.StartsWith("M") || address.StartsWith("m"))
                     {
                         int num = Convert.ToInt32(address.Substring(1));
@@ -244,44 +222,29 @@ namespace TOPRO.HSL.Inovance
                         {
                             return OperateResult.CreateSuccessResult(text + (num - 8000 + 8000));
                         }
-
                         return OperateResult.CreateSuccessResult(text + num);
+                    }
+                    if (ModbusHelper.TransPointAddressToModbus(text, address, new string[3] { "D", "SD", "R" }, new int[3] { 0, 9216, 12288 }, out var newAddress3))
+                    {
+                        return OperateResult.CreateSuccessResult(newAddress3);
                     }
                 }
                 else
                 {
-                    if (address.StartsWith("D") || address.StartsWith("d"))
+                    if (ModbusHelper.TransAddressToModbus(text, address, new string[4] { "D", "SD", "R", "T" }, new int[4] { 0, 9216, 12288, 61440 }, out var newAddress4))
                     {
-                        return OperateResult.CreateSuccessResult(text + Convert.ToInt32(address.Substring(1)));
+                        return OperateResult.CreateSuccessResult(newAddress4);
                     }
-
-                    if (address.StartsWith("SD") || address.StartsWith("sd"))
-                    {
-                        return OperateResult.CreateSuccessResult(text + (Convert.ToInt32(address.Substring(2)) + 9216));
-                    }
-
-                    if (address.StartsWith("R") || address.StartsWith("r"))
-                    {
-                        return OperateResult.CreateSuccessResult(text + (Convert.ToInt32(address.Substring(1)) + 12288));
-                    }
-
-                    if (address.StartsWith("T") || address.StartsWith("t"))
-                    {
-                        return OperateResult.CreateSuccessResult(text + (Convert.ToInt32(address.Substring(1)) + 61440));
-                    }
-
-                    if (address.StartsWith("C") || address.StartsWith("c"))
+                    if (address.StartsWith("C", StringComparison.InvariantCultureIgnoreCase))
                     {
                         int num2 = Convert.ToInt32(address.Substring(1));
                         if (num2 >= 200)
                         {
                             return OperateResult.CreateSuccessResult(text + ((num2 - 200) * 2 + 63232));
                         }
-
                         return OperateResult.CreateSuccessResult(text + (num2 + 62464));
                     }
                 }
-
                 return new OperateResult<string>(StringResources.Language.NotSupportedDataType);
             }
             catch (Exception ex)
@@ -294,53 +257,32 @@ namespace TOPRO.HSL.Inovance
         {
             try
             {
-                string text = string.Empty;
+                string station = string.Empty;
                 OperateResult<int> operateResult = HslHelper.ExtractParameter(ref address, "s");
                 if (operateResult.IsSuccess)
                 {
-                    text = $"s={operateResult.Content};";
+                    station = $"s={operateResult.Content};";
                 }
-
-                if (modbusCode == 1 || modbusCode == 15 || modbusCode == 5 || modbusCode == 3 || modbusCode == 16)
+                string newAddress4;
+                if (modbusCode == 1 || modbusCode == 15 || modbusCode == 5)
                 {
-                    if (address.StartsWith("X") || address.StartsWith("x"))
+                    if (ModbusHelper.TransAddressToModbus(station, address, new string[2] { "X", "Y" }, new int[2] { 63488, 64512 }, CalculateH3UStartAddress, out var newAddress))
                     {
-                        return OperateResult.CreateSuccessResult(text + (CalculateH3UStartAddress(address.Substring(1)) + 63488));
+                        return OperateResult.CreateSuccessResult(newAddress);
                     }
-
-                    if (address.StartsWith("Y") || address.StartsWith("y"))
+                    if (ModbusHelper.TransAddressToModbus(station, address, new string[3] { "S", "B", "M" }, new int[3] { 57344, 12288, 0 }, out var newAddress2))
                     {
-                        return OperateResult.CreateSuccessResult(text + (CalculateH3UStartAddress(address.Substring(1)) + 64512));
+                        return OperateResult.CreateSuccessResult(newAddress2);
                     }
-
-                    if (address.StartsWith("S") || address.StartsWith("s"))
+                    if (ModbusHelper.TransPointAddressToModbus(station, address, new string[2] { "D", "R" }, new int[2] { 0, 12288 }, out var newAddress3))
                     {
-                        return OperateResult.CreateSuccessResult(text + (Convert.ToInt32(address.Substring(1)) + 57344));
-                    }
-
-                    if (address.StartsWith("B") || address.StartsWith("b"))
-                    {
-                        return OperateResult.CreateSuccessResult(text + (Convert.ToInt32(address.Substring(1)) + 12288));
-                    }
-
-                    if (address.StartsWith("M") || address.StartsWith("m"))
-                    {
-                        return OperateResult.CreateSuccessResult(text + Convert.ToInt32(address.Substring(1)));
+                        return OperateResult.CreateSuccessResult(newAddress3);
                     }
                 }
-                else
+                else if (ModbusHelper.TransAddressToModbus(station, address, new string[2] { "D", "R" }, new int[2] { 0, 12288 }, out newAddress4))
                 {
-                    if (address.StartsWith("D") || address.StartsWith("d"))
-                    {
-                        return OperateResult.CreateSuccessResult(text + Convert.ToInt32(address.Substring(1)));
-                    }
-
-                    if (address.StartsWith("R") || address.StartsWith("r"))
-                    {
-                        return OperateResult.CreateSuccessResult(text + (Convert.ToInt32(address.Substring(1)) + 12288));
-                    }
+                    return OperateResult.CreateSuccessResult(newAddress4);
                 }
-
                 return new OperateResult<string>(StringResources.Language.NotSupportedDataType);
             }
             catch (Exception ex)

@@ -49,7 +49,7 @@ namespace TOPRO.Test
         }
 
         [Theory]
-        [InlineData("192.168.1.110", 502, PlcType.Inovance, ProtocolType.Modbus_Tcp)]
+        [InlineData("127.0.0.1", 502, PlcType.Inovance, ProtocolType.Modbus_Tcp)]
         public void Test1(string ip, int port,
             PlcType plcType, ProtocolType protocolType)
         {
@@ -61,7 +61,7 @@ namespace TOPRO.Test
 
                 Station = 1,
                 AddressStartWithZero = true,
-                Series = InovanceSeries.AM,
+                Series = InovanceSeries.H3U,
                 IsStringReverse = false,
 
                 PlcType = plcType,
@@ -69,7 +69,9 @@ namespace TOPRO.Test
             });
             Assert.True(res.IsSuccess);
 
-            var a = _operationManager.Read<string>("MW9100", 12).Content;
+            res = _operationManager.Write("D8000", 123.45f);
+
+            var a = _operationManager.Read<float>("D8000").Content;
 
             _operationManager.CloseConnection();
         }
@@ -231,8 +233,8 @@ namespace TOPRO.Test
                 AddressStartWithZero = true,
                 IsStringReverse = false,
 
-                PlcType = plcType,
-                ProtocolType = protocolType
+                PlcType = PlcType.Modbus,
+                ProtocolType = ProtocolType.Modbus_Tcp
             }, longConnection: false);
             Assert.True(res.IsSuccess);
 

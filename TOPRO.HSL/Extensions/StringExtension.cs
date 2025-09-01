@@ -20,5 +20,22 @@ namespace TOPRO.HSL.Extensions
             }
             return Convert.ToInt32(bit);
         }
+
+        public static bool StartsWithAndNumber(this string address, string code)
+        {
+            if (address.StartsWith(code, StringComparison.InvariantCultureIgnoreCase))
+            {
+                if (address.Length <= code.Length)
+                {
+                    return false;
+                }
+                if (char.IsNumber(address[code.Length]))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 }
