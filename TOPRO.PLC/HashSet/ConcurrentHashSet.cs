@@ -91,7 +91,16 @@ namespace Topro.CombRetLine.Infrastructure.HashLock
 
         public IEnumerator<T> GetEnumerator()
         {
-            return _hashSet.GetEnumerator();
+            try
+            {
+                _lock.EnterReadLock();
+
+                return _hashSet.GetEnumerator();
+            }
+            finally
+            {
+                if (_lock.IsReadLockHeld) _lock.ExitReadLock();
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
