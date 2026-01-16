@@ -288,18 +288,29 @@ namespace TOPRO.HSL.Core.Net
         /// </example>
         public OperateResult ConnectClose( )
         {
-            OperateResult result = new OperateResult( );
-            isPersistentConn = false;
+            OperateResult result = new OperateResult();
 
-            InteractiveLock.Enter( );
-            // 额外操作
-            result = ExtraOnDisconnect( CoreSocket );
-            // 关闭信息
-            CoreSocket?.Close( );
-            CoreSocket = null;
-            InteractiveLock.Leave( );
-            
-            LogNet?.WriteDebug( ToString( ), StringResources.Language.NetEngineClose );
+            try
+            {
+
+                isPersistentConn = false;
+
+                InteractiveLock.Enter();
+                // 额外操作
+                result = ExtraOnDisconnect(CoreSocket);
+                // 关闭信息
+                CoreSocket?.Close();
+                CoreSocket = null;
+                InteractiveLock.Leave();
+
+                LogNet?.WriteDebug(ToString(), StringResources.Language.NetEngineClose);
+
+            }
+            catch (Exception e) 
+            {
+                result.Message = e.ToString();
+            }
+           
             return result;
         }
 

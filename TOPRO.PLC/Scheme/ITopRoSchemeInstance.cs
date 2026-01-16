@@ -5,25 +5,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TOPRO.PLC.Enums;
+using Topro.CombRetLine.Infrastructure.HashLock;
 
 namespace TOPRO.PLC.Scheme
 {
     public interface ITopRoSchemeInstance
     {
-        HashSet<ITopRoNetScheme> Instance { get; }
+        ConcurrentHashSet<ITopRoNetScheme> Instance { get; }
 
         void Exist();
     }
 
     public class TopRoSchemeInstance : ITopRoSchemeInstance 
     {
-        private volatile HashSet<ITopRoNetScheme> netSchemes;
+        private volatile ConcurrentHashSet<ITopRoNetScheme> netSchemes;
+
         public TopRoSchemeInstance()
         {
-            netSchemes = new HashSet<ITopRoNetScheme>();
+            netSchemes = new ConcurrentHashSet<ITopRoNetScheme>();
         }
 
-        public HashSet<ITopRoNetScheme> Instance => netSchemes;
+        public ConcurrentHashSet<ITopRoNetScheme> Instance => netSchemes;
 
         public void Exist()
         {

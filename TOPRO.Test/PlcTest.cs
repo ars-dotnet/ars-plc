@@ -145,6 +145,16 @@ namespace TOPRO.Test
 
             Assert.True(res.IsSuccess);
 
+            res = _operationManager.DefaultConnectionAndInit(new DefaultOperationDto()
+            {
+                IpAddress = ip,
+                Port = port,
+                PlcType = plcType,
+                ProtocolType = protocolType
+            });
+
+            Assert.True(res.IsSuccess);
+
             //单个读写
             TestSingle(_operationManager, dbNamePrefix, dbFrom);
 
@@ -164,6 +174,8 @@ namespace TOPRO.Test
             var booldatas = _operationManager.Read<bool[]>($"M{dbFrom + 100}", 2);
             Assert.True(true == booldatas.Content[0]);
             Assert.True(true == booldatas.Content[1]);
+
+            _instance.Exist();
 
             _operationManager.CloseConnection();
         }

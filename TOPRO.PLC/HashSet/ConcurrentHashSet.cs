@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Topro.CombRetLine.Infrastructure.HashLock
 {
-    public class ConcurrentHashSet<T> : IDisposable
+    public class ConcurrentHashSet<T> : IEnumerable<T>, IDisposable
     {
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
 
@@ -86,6 +87,16 @@ namespace Topro.CombRetLine.Infrastructure.HashLock
         public void Dispose()
         {
             if (_lock != null) _lock.Dispose();
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return _hashSet.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
         #endregion
     }
