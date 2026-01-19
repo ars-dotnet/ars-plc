@@ -134,7 +134,7 @@ namespace TOPRO.Test
             PlcType plcType, ProtocolType protocolType,
             string dbNamePrefix, int dbFrom)
         {
-            using var _operationManager = _serviceProvider.GetRequiredService<IOperationManager>();
+            using var _operationManager = _serviceProvider.CreateScope().ServiceProvider.GetRequiredService<IOperationManager>();
             var res = _operationManager.DefaultConnectionAndInit(new DefaultOperationDto()
             {
                 IpAddress = ip,
@@ -757,14 +757,14 @@ namespace TOPRO.Test
             IEnumerable<Task<(IOperationManager, OperateResult)>> tasks = new List<Task<(IOperationManager, OperateResult)>>()
             {
                 ConnectAsync("127.0.0.1",6000),
-                ConnectAsync("127.0.0.1",6001),
-                ConnectAsync("127.0.0.1",6002),
-                ConnectAsync("127.0.0.1",6003),
-                ConnectAsync("127.0.0.1",6004),
-                ConnectAsync("127.0.0.1",6005),
-                ConnectAsync("127.0.0.1",6006),
-                ConnectAsync("127.0.0.1",6007),
-                ConnectAsync("127.0.0.1",6008),
+                ConnectAsync("127.0.0.1",6000),
+                ConnectAsync("127.0.0.1",6000),
+                ConnectAsync("127.0.0.1",6000),
+                ConnectAsync("127.0.0.1",6000),
+                ConnectAsync("127.0.0.1",6000),
+                ConnectAsync("127.0.0.1",6000),
+                ConnectAsync("127.0.0.1",6000),
+                ConnectAsync("127.0.0.1",6000),
             };
 
             var mm = await Task.WhenAll(tasks);
@@ -779,7 +779,7 @@ namespace TOPRO.Test
 
         private async Task<(IOperationManager, OperateResult)> ConnectAsync(string ip,int port) 
         {
-            await Task.Delay(new Random().Next(10, 200));
+            //await Task.Delay(new Random().Next(10, 200));
 
             var provider = _serviceProvider.CreateScope().ServiceProvider;
 

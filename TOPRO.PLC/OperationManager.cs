@@ -124,6 +124,7 @@ namespace TOPRO.PLC
             opt.PlcType = input.PlcType;
             opt.ProtocolType = input.ProtocolType;
             opt.LongConnection = longConnection;
+
             _operation = opt;
             _operation.Excuting(input, out bool hasConnected);
 
@@ -220,7 +221,7 @@ namespace TOPRO.PLC
                     GetMethodInfo<string>(
                         _operation.ReadWriteNet.GetType(),
                         optName,
-                        new Type[] { typeof(string), typeof(ushort),typeof(Encoding) })
+                        new Type[] { typeof(string), typeof(ushort), typeof(Encoding) })
                     ) ?? new OperateResult<string>("未调用连接初始化方法");
             }
 
@@ -303,7 +304,7 @@ namespace TOPRO.PLC
 
             Encoding? encoding = null;
             pams.TryGetValue("encode", out object? encode);
-            if (null != encode) 
+            if (null != encode)
             {
                 encoding = encode as Encoding;
             }
@@ -326,7 +327,7 @@ namespace TOPRO.PLC
                         typeof(string))
                     ) ?? new OperateResult("未调用连接初始化方法");
             }
-            else 
+            else
             {
                 return _operation?.Write(
                     address.ToString()!,
@@ -335,7 +336,7 @@ namespace TOPRO.PLC
                     GetMethodInfo(
                         _operation.ReadWriteNet.GetType(),
                         optName,
-                        new Type[] { typeof(string), typeof(string),typeof(Encoding) },
+                        new Type[] { typeof(string), typeof(string), typeof(Encoding) },
                         typeof(string))
                     ) ?? new OperateResult("未调用连接初始化方法");
             }

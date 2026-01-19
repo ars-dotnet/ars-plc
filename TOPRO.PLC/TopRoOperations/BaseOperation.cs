@@ -97,7 +97,7 @@ namespace TOPRO.PLC.TopRoOperations
         /// </summary>
         /// <param name="input"></param>
         /// <param name="hasConnected"></param>
-        public virtual void Excuting(OperationDto input, out bool hasConnected) 
+        public virtual void Excuting(OperationDto input, out bool hasConnected)
         {
             Check(input);
 
@@ -128,7 +128,7 @@ namespace TOPRO.PLC.TopRoOperations
         /// <summary>
         /// 操作后执行
         /// </summary>
-        public virtual void Excuted() 
+        public virtual void Excuted()
         {
             if (!LongConnection)
             {
@@ -185,7 +185,7 @@ namespace TOPRO.PLC.TopRoOperations
         /// 参数校验
         /// </summary>
         /// <param name="input"></param>
-        protected virtual void Check(OperationDto input) 
+        protected virtual void Check(OperationDto input)
         {
             return;
         }
@@ -194,7 +194,7 @@ namespace TOPRO.PLC.TopRoOperations
         /// 初始化
         /// </summary>
         /// <param name="input"></param>
-        protected virtual void Init(OperationDto input) 
+        protected virtual void Init(OperationDto input)
         {
             TopRoNetScheme = GetTopRoNetScheme(input, _provider.Resolve(input));
         }
