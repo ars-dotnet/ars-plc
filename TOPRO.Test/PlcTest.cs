@@ -561,8 +561,8 @@ namespace TOPRO.Test
             Assert.True(data.Content == 123);
 
             //写bit位
-            //   （DB1.DBX0.8 - DB1.DBX0.15）是右边的8位，从右向左算；
-            //   （DB1.DBX0.0 - DB1.DBX0.7）是左边的8位，从右向左算；
+            //   （DB1.DBX0.8 -> DB1.DBX0.15）是右边的8位，从右向左算；
+            //   （DB1.DBX0.0 -> DB1.DBX0.7）是左边的8位，从右向左算；
 
             // 00000000 01111011 => 00000000 01111010 
             res = _operationManager.Write("DB150.DBB286.8", false);
@@ -775,6 +775,40 @@ namespace TOPRO.Test
             var taskss = mm.Select(r => CloseAsync(r.Item1));
 
             var nn = await Task.WhenAll(taskss);
+        }
+
+        /// <summary>
+        /// TestSpan
+        /// </summary>
+        [Theory]
+        [InlineData("127.0.0.1", 6000, PlcType.MelSec, ProtocolType.MC_Qna_3E_Binary)]
+        public void TestSpan(string ip, int port,PlcType plcType, ProtocolType protocolType) 
+        {
+            string str = "aabb00121200,aabb00131300    ,aabb";
+            var xx = SplitResult.SplitOptimized(str.AsSpan(), new[] { '\0', ',' }.AsSpan()).ToArray();
+
+            string str1 = string.Empty;
+            var xxx = SplitResult.SplitOptimized(str1.AsSpan(), new[] { '\0', ',' }.AsSpan()).ToArray();
+
+            using var _operationManager = _serviceProvider.GetRequiredService<IOperationManager>();
+            var res = _operationManager.DefaultConnectionAndInit(new DefaultOperationDto()
+            {
+                IpAddress = ip,
+                Port = port,
+                PlcType = plcType,
+                ProtocolType = protocolType
+            }, longConnection: false);
+
+            Assert.True(res.IsSuccess);
+
+            res = _operationManager.Write<string>("D100", "aabb121212,");
+            res = _operationManager.Write<string>("D110", "aabb121212");
+            res = _operationManager.Write<string>("D120", "aabb121212");
+            res = _operationManager.Write<string>("D130", "aabb121212,");
+
+            Assert.True(res.IsSuccess);
+
+            var data = _operationManager.Read<string[]>("D100", 40);
         }
 
         private async Task<(IOperationManager, OperateResult)> ConnectAsync(string ip,int port) 

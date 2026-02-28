@@ -232,10 +232,15 @@ namespace TOPRO.PLC
             }
             else
             {
-                var arrays = res.Content?
-                        .Split(new char[] { '\0', ',' })
-                        .Where(r => !string.IsNullOrEmpty(r))
-                        .ToArray();
+                //var arrays = res.Content?
+                //        .Split(new char[] { '\0', ',' })
+                //        .Where(r => !string.IsNullOrEmpty(r))
+                //        .ToArray();
+
+                //Span来分割，效率更高，且不需要分配新的字符串数组
+                var arrays = SplitResult.SplitOptimized(
+                    res.Content.AsSpan(), new[] { '\0', ',' }.AsSpan()).
+                    ToArray();
 
                 var data = (T)Convert.ChangeType(arrays, typeof(T))!;
                 return OperateResult.CreateSuccessResult(data);
