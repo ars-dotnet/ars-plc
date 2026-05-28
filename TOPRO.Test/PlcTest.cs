@@ -54,14 +54,14 @@ namespace TOPRO.Test
             PlcType plcType, ProtocolType protocolType)
         {
             using var _operationManager = _serviceProvider.GetRequiredService<IOperationManager>();
-            var res = _operationManager.ModbusConnectionAndInit(new InovanceOperationDto()
+            var res = _operationManager.InovanceConnectionAndInit(new InovanceOperationDto()
             {
                 IpAddress = ip,
                 Port = port,
 
                 Station = 1,
                 AddressStartWithZero = true,
-                Series = InovanceSeries.H3U,
+                Series = InovanceSeries.AM,
                 IsStringReverse = false,
 
                 PlcType = plcType,
@@ -69,11 +69,10 @@ namespace TOPRO.Test
             });
             Assert.True(res.IsSuccess);
 
-            res = _operationManager.Write("D8000", 123.45f);
+            var a = _operationManager.Read<float>("MD1000");
+            var b = _operationManager.Read<float>("MW2000");
 
-            var a = _operationManager.Read<float>("D8000").Content;
-
-            _operationManager.CloseConnection();
+           _operationManager.CloseConnection();
         }
 
         /// <summary>
@@ -674,19 +673,19 @@ namespace TOPRO.Test
             Assert.True(res.IsSuccess);
 
             //写bit位
-            //res = _operationManager.Write("D200.1",true);
+            res = _operationManager.Write("D200.0", true);
             //res = _operationManager.Write("D200.1", false);
+            Assert.True(res.IsSuccess);
+
+            //res = _operationManager.Write("D200.1", new bool[] { true, false, true });
             //Assert.True(res.IsSuccess);
 
-            //res = _operationManager.Write("D200.1", new bool[] { true,false,true});
-            //Assert.True(res.IsSuccess);
+            //读bit位
+            var data = _operationManager.Read<bool>("D200.0");
+            Assert.True(data.IsSuccess);
+            Assert.True(data.Content == true);
 
-            ////读bit位
-            //var data = _operationManager.Read<bool>("D200.1");
-            //Assert.True(data.IsSuccess);
-            //Assert.True(data.Content == true);
-
-            //var datas = _operationManager.Read<bool[]>("D200.1",6);
+            //var datas = _operationManager.Read<bool[]>("D200.1", 6);
 
             //Assert.True(datas.IsSuccess);
             //Assert.True(datas.Content[0] == true);
@@ -701,7 +700,7 @@ namespace TOPRO.Test
             //Assert.True(datas.Content[5] == true);
             //Assert.True(datas.Content[6] == true);
 
-            var xx = _operationManager.Read<short>("D100", 1);
+            //var xx = _operationManager.Read<short>("D100", 1);
 
             _operationManager.CloseConnection();
         }
